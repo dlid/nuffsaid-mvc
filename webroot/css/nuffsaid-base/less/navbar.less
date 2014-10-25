@@ -42,7 +42,6 @@
   }
 
   a {
-    font-size: @fontSizeSmall;
     display: block;
     text-decoration: none;
     color: inherit;
@@ -92,6 +91,7 @@ list-style-type: none;
   padding: 0 10px;
   color: #666;
   text-decoration: none;
+
 }
 
 .tabs li {
@@ -113,6 +113,12 @@ list-style-type: none;
   cursor: pointer;
   padding:0;
   float:right;
+
+  &:hover {
+    a {
+      color: #000;
+    }
+  } 
 }
 
 .tabs li.last {

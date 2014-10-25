@@ -17,6 +17,7 @@ Thumbs.db
 # Package handling
 composer.json
 !/composer.json
+3pp/*
 composer.lock
 vendor/.git
 *.tmp

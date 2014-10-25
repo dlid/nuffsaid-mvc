@@ -1854,7 +1854,7 @@ body:after {
 }
 html {
   background-color: #f3f3f3;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-size: 16px;
 }
 #wrapper {
@@ -1977,6 +1977,21 @@ html {
   width: 23.416666666667%;
   margin: 0 1.0416666666667%;
 }
+#toolbar {
+  padding-top: 11px;
+  font-size: 0.75em;
+}
+#toolbar a {
+  text-decoration: none;
+  color: #ffe;
+}
+#toolbar a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+#toolbar .about {
+  margin-left: 22px;
+}
 #featured-1,
 #featured-2,
 #featured-3,
@@ -2029,6 +2044,9 @@ table tbody tr:nth-child(odd) {
   border-top: 3px solid #00adef;
   padding-top: 2em;
   font-size: 0.75em;
+}
+#footer p {
+  line-height: 1.5em;
 }
 #footer .bottom {
   color: #ccc ! important;
@@ -2149,7 +2167,6 @@ table tbody tr:nth-child(odd) {
   color: #fff;
 }
 .navbar a {
-  font-size: 0.875em;
   display: block;
   text-decoration: none;
   color: inherit;
@@ -2207,6 +2224,9 @@ table tbody tr:nth-child(odd) {
   cursor: pointer;
   padding: 0;
   float: right;
+}
+.tabs li:not(.text):hover a {
+  color: #000;
 }
 .tabs li.last {
   margin-right: 22px;

@@ -221,6 +221,24 @@ article h2 {
     .column(@sidebarColumnCount);
 }
  
+
+#toolbar {
+    padding-top: @magicNumber / 2;
+    font-size: @fontSizeSmallest;
+    a {
+        text-decoration: none;
+        color: #ffe;
+        &:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+    }
+
+    .about {
+        margin-left: @magicNumber ;
+    }
+}
+
 #featured-1,
 #featured-2,
 #featured-3,
@@ -275,6 +293,10 @@ table {
     border-top: 3px solid #00adef;
     padding-top: 2em;
     font-size: @fontSizeSmallest;
+
+    p {
+        line-height: 1.5em;
+    }
 
     .bottom {
         color: #ccc ! important;
