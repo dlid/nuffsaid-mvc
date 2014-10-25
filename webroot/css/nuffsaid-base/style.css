@@ -189,6 +189,14 @@ body:after {
 body:after {
   clear: both;
 }
+body:before,
+body:after {
+  content: "";
+  display: table;
+}
+body:after {
+  clear: both;
+}
 @font-face {
   font-family: 'FontAwesome';
   src: url('font-awesome-4.2.0/fonts/fontawesome-webfont.eot?v=4.2.0');
@@ -1874,6 +1882,14 @@ html {
 #header:after {
   clear: both;
 }
+#header:before,
+#header:after {
+  content: "";
+  display: table;
+}
+#header:after {
+  clear: both;
+}
 #toolbar {
   background-color: #313131;
   color: #eee;
@@ -1881,6 +1897,14 @@ html {
 .row {
   padding-bottom: 11px;
   *zoom: 1;
+}
+.row:before,
+.row:after {
+  content: "";
+  display: table;
+}
+.row:after {
+  clear: both;
 }
 .row:before,
 .row:after {
@@ -1925,9 +1949,6 @@ html {
   font-weight: 300;
   font-size: 0.875em;
 }
-.content-flash+.content-main {
-  padding-top: 11px;
-}
 .content-flash.flash-warning {
   background-color: orange;
 }
@@ -1962,8 +1983,29 @@ html {
   width: 97.916666666667%;
   margin: 0 1.0416666666667%;
 }
-.content-main {
-  padding-top: 22px;
+.icon-list-item {
+  float: left;
+  display: block;
+  margin-left: 50px;
+  margin-top: 2em;
+}
+.icon-list .fa-2x {
+  float: left;
+  margin-left: -50px;
+}
+.icon-list .fa-2x.orange {
+  color: #fcbb45;
+  margin-left: -45px;
+}
+.icon-list .fa-2x.red {
+  color: #d44950;
+}
+.icon-list .fa-2x.green {
+  color: #1d9d74;
+  margin-left: -45px;
+}
+.content-main h1 {
+  margin-top: 0;
 }
 #main {
   display: inline;
@@ -1991,6 +2033,9 @@ html {
 }
 #toolbar .about {
   margin-left: 22px;
+}
+#toolbar .right {
+  margin-right: 22px;
 }
 #featured-1,
 #featured-2,
@@ -2058,6 +2103,125 @@ table tbody tr:nth-child(odd) {
 }
 #footer a:hover {
   color: #fff;
+}
+.col-1 {
+  display: inline;
+  float: left;
+  width: 6.25%;
+  margin: 0 1.0416666666667%;
+}
+.col-2 {
+  display: inline;
+  float: left;
+  width: 14.583333333333%;
+  margin: 0 1.0416666666667%;
+}
+.col-3 {
+  display: inline;
+  float: left;
+  width: 22.916666666667%;
+  margin: 0 1.0416666666667%;
+}
+.col-4 {
+  display: inline;
+  float: left;
+  width: 31.25%;
+  margin: 0 1.0416666666667%;
+}
+.col-5 {
+  display: inline;
+  float: left;
+  width: 39.583333333333%;
+  margin: 0 1.0416666666667%;
+}
+.col-6 {
+  display: inline;
+  float: left;
+  width: 47.916666666667%;
+  margin: 0 1.0416666666667%;
+}
+.col-7 {
+  display: inline;
+  float: left;
+  width: 56.25%;
+  margin: 0 1.0416666666667%;
+}
+.col-8 {
+  display: inline;
+  float: left;
+  width: 64.583333333333%;
+  margin: 0 1.0416666666667%;
+}
+.col-9 {
+  display: inline;
+  float: left;
+  width: 72.916666666667%;
+  margin: 0 1.0416666666667%;
+}
+.col-10 {
+  display: inline;
+  float: left;
+  width: 81.25%;
+  margin: 0 1.0416666666667%;
+}
+.col-11 {
+  display: inline;
+  float: left;
+  width: 89.583333333333%;
+  margin: 0 1.0416666666667%;
+}
+.col-12 {
+  display: inline;
+  float: left;
+  width: 97.916666666667%;
+  margin: 0 1.0416666666667%;
+}
+.push-1 {
+  margin-left: 9.375%;
+}
+.push-2 {
+  margin-left: 17.708333333333%;
+}
+.push-3 {
+  margin-left: 26.041666666667%;
+}
+.push-4 {
+  margin-left: 34.375%;
+}
+.push-5 {
+  margin-left: 42.708333333333%;
+}
+.push-6 {
+  margin-left: 51.041666666667%;
+}
+.push-7 {
+  margin-left: 59.375%;
+}
+.push-8 {
+  margin-left: 67.708333333333%;
+}
+.push-9 {
+  margin-left: 76.041666666667%;
+}
+.push-10 {
+  margin-left: 84.375%;
+}
+.push-11 {
+  margin-left: 92.708333333333%;
+}
+.push-12 {
+  margin-left: 101.04166666667%;
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
 }
 @media (min-width: 768px) {
   #main {
@@ -2274,9 +2438,11 @@ fieldset p {
 form label {
   line-height: 2em;
   font-size: 0.875em;
+  display: block;
 }
 form input[type=text],
 form input[type=email],
+form input[type=password],
 form input[type=number] {
   font-size: 0.875em;
   padding: 4px;
@@ -2291,9 +2457,15 @@ form input.validation-failed {
   border-color: red;
 }
 form ul.validation-message {
-  margin: 0 0 0 0px;
+  margin: 0;
   font-size: 0.875em;
   color: red;
+  list-style-type: none;
+  padding: 0 10px 0 0;
+}
+form ul.validation-message li {
+  margin-bottom: 8px;
+  padding-left: 10px;
 }
 @-moz-document url-prefix() {
   form fieldset legend span {

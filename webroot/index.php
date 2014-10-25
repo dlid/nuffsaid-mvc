@@ -21,15 +21,14 @@ $di->setShared('db', function() {
 $di->set('form', 'Mos\HTMLForm\CForm');
 
 // Include database support
-$di->setShared('userContext', function() {
-    $ctx = new  \Anax\UserContext\UserContext();
+$di->setShared('userContext', function() use ($di) {
+    $ctx = new \Anax\UserContext\UserContext();
+    $ctx->setDI($di);
 //    $db->setOptions(require ANAX_APP_PATH . 'config/database_sqlite.php');
     return $ctx;
 });
 
 $app->views->addString('<p>Spelaihop är sidan där spelintresserade kan ställa frågor om alla möjliga spel och få svar.</p>', 'footer-col-1');
-
-
 
 $app->router->add('', function() use ($app, $di) {
   $app->theme->setTitle("Start");
@@ -40,6 +39,7 @@ $app->router->add('', function() use ($app, $di) {
 	]);
 });
 
+$di->set('UsersController', '\Anax\Users\UsersController');
 
 $app->router->add('questions', function() use ($app, $di) {
   $app->theme->setTitle("Frågor");
@@ -71,6 +71,21 @@ $app->router->add('tags', function() use ($app, $di) {
       'content' => "tagar"
   ]);
 });
+
+
+$app->router->add('about', function() use ($app, $di) {
+$app->theme->setTitle("Me");
+ 
+  $content = $app->fileContent->get('me.md');
+  $content = $app->textFilter->doFilter($content, 'shortcode, markdown');
+
+  $app->views->add('shared/page', [
+      'content' => $content,
+      'sidebar' => ""
+  ]);
+});
+
+  
 
 if( $di->request->getGet(null) == "show_grid" ) {
   $app->theme->addStylesheet('css/void-base/show-grid.css');

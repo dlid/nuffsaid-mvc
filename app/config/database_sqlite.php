@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'dsn'     => "sqlite:dali14.sqlite",
-    'verbose' => false
+    'dsn'     => "sqlite:../data/nuffsaid.sqlite",
+    'verbose' => false,
+    'table_prefix' => 'ns_'
 ];

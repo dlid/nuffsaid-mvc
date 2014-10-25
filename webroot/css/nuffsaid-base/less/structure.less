@@ -163,7 +163,6 @@ article h2 {
     }
 
     &+.content-main {
-        padding-top: @magicNumber/2;
     }
 
     &.flash-warning {
@@ -208,8 +207,33 @@ article h2 {
    .column(@columns);
 }
 
+
+.icon-list-item {
+ float:left; 
+ display:block; 
+ margin-left:50px;
+ margin-top: 2em;
+}
+.icon-list .fa-2x {
+    float:left; margin-left: -50px;
+}
+.icon-list .fa-2x.orange {
+ color:rgb(252, 187, 69); 
+ margin-left: -45px;
+}
+.icon-list .fa-2x.red {
+ color:#d44950; 
+}
+.icon-list .fa-2x.green {
+ color:#1d9d74; 
+  margin-left: -45px;
+}
+
+
 .content-main {
-    padding-top: @magicNumber;
+    h1 {
+        margin-top: 0;
+    }
 }
 
 #main {
@@ -236,6 +260,10 @@ article h2 {
 
     .about {
         margin-left: @magicNumber ;
+    }
+
+    .right {
+        margin-right: @magicNumber;
     }
 }
 

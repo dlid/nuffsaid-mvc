@@ -87,8 +87,10 @@
 
 	<div class="row content-block content-main">
 		<div id='main'<?= !$this->views->hasContent('sidebar') ? ' class="wide"' : null; ?>>
-		<?php if(isset($main)) echo $main?>
-			<?php $this->views->render('main')?>
+			<div class="row"><div class="col-wide">
+				<?php if(isset($main)) echo $main?>
+				<?php $this->views->render('main')?>
+			</div>	
 		</div>
 		<?php if($this->views->hasContent('sidebar')): ?>
 			<div id='sidebar'>

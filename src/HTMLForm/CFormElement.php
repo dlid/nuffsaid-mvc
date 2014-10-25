@@ -34,12 +34,14 @@ class CFormElement implements \ArrayAccess
         //$this['key'] = $name;
         //$this['name'] = isset($this['name']) ? $this['name'] : $name;
 
+
         // Use character encoding from lydia if available, else use UTF-8 OBSOLETE, remove this.
         if (is_callable('CLydia::Instance()')) {
             $this->characterEncoding = CLydia::Instance()->config['character_encoding'];
         } else {
             $this->characterEncoding = 'UTF-8';
         }
+
     }
   
   
@@ -146,6 +148,8 @@ class CFormElement implements \ArrayAccess
         } else {
             throw new \Exception("Form element does not exists and can not be created: $name - $type");
         }
+
+
     }
 
 
@@ -191,6 +195,8 @@ class CFormElement implements \ArrayAccess
     public function getHTML()
     {
 
+
+
         // Add disabled to be able to disable a form element
         // Add maxlength
         $id           =  $this->GetElementId();
@@ -220,7 +226,7 @@ class CFormElement implements \ArrayAccess
         $onlyValue    = isset($this['value']) ? htmlentities($this['value'], ENT_QUOTES, $this->characterEncoding) : null;
         $value        = isset($this['value']) ? " value='{$onlyValue}'" : null;
         $br           = isset($this['br']) ? $this['br'] : null;
-
+        $maxlength    = isset($this['maxlength']) ? " maxlength='{$this['maxlength']}'" : null;
 
         $messages = $this->getValidationMessages();
         $html = "";
@@ -229,7 +235,7 @@ class CFormElement implements \ArrayAccess
         if (in_array($this['type'], ['submit', 'reset', 'button'])) {
  
             // type=submit || reset || button
-             $html = "<span><input id='$id'{$type}{$class}{$name}{$value}{$autofocus}{$readonly}{$title} /></span>\n";
+             $html = "<span><input id='$id'{$type}{$class}{$name}{$value}{$autofocus}{$readonly}{$title}/></span>\n";
  
         } else if ($this['type'] == 'search-widget') {
 
@@ -311,7 +317,7 @@ class CFormElement implements \ArrayAccess
         } else {
 
             // Everything else 
-            $html =  "<p><label for='$id'>$label</label>{$br}\n<input id='$id'{$type}{$class}{$name}{$value}{$autofocus}{$required}{$readonly}{$placeholder}{$title}{$multiple}{$pattern}{$max}{$min}{$step}/>{$messages}</p><p class='cf-desc'>{$description}</p>\n";        
+            $html =  "<p><label for='$id'>$label</label>{$br}\n<input id='$id'{$type}{$class}{$name}{$value}{$autofocus}{$required}{$readonly}{$placeholder}{$title}{$multiple}{$pattern}{$max}{$min}{$step}{$maxlength}/>{$messages}</p><p class='cf-desc'>{$description}</p>\n";        
 
         }
 
@@ -411,6 +417,7 @@ class CFormElement implements \ArrayAccess
     public function useNameAsDefaultValue() 
     {
         if (!isset($this['value'])) {
+
             $this['value'] = ucfirst(strtolower(str_replace(array('-','_'), ' ', $this['name'])));
         }
     }

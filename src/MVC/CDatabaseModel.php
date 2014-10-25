@@ -94,6 +94,8 @@ class CDatabaseModel implements \Anax\DI\IInjectionAware
 	  $keys   = array_keys($values);
 	  $values = array_values($values);
 
+	  $this->id = null;
+
 	  $this->db->insert(
 	      $this->getSource(),
 	      $keys

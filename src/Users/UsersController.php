@@ -11,6 +11,169 @@ class UsersController implements \Anax\DI\IInjectionAware
 	use \Anax\DI\TInjectable;
 
 
+	public function logoutAction() {
+		$this->userContext->logout();
+		$this->views->add('users/loggedout', [], 'main');
+	}
+
+	public function welcomeAction() {
+		if( $this->userContext->isLoggedIn() ){
+			$this->views->add('users/welcome', [
+				'name' =>  htmlentities($this->userContext->getUserDisplayName(), null, 'UTF-8')
+				], 'main');
+		} else {
+			$this->dispatcher->forward([
+            'controller' => 'error',
+            'action' => 'statusCode',
+            'params' => [
+                'code' => 403,
+                'message' => "Du saknar behörighet för den här sidan",
+            ],
+        ]);
+		}
+	}
+
+	public function signupAction() {
+		$this->theme->setTitle("Bli medlem");
+		$form = $this->getSignupForm();
+
+		$status = $form->check();
+
+		$formOrMessage = $form->getHTML(array('novalidate' => true));
+
+    if ($status === true) {
+
+			// What to do if the form was submitted?
+			#$form->AddOUtput("<p><i>Form was submitted and the callback method returned true.</i></p>");
+			# $this->request->redirectTo('users/welcome');
+			header("Location: " . $this->url->create('users/welcome'));
+
+    } else if ($status === false) {
+    
+        // What to do when form could not be processed?
+      //  $form->AddOutput("<p><i>Form was submitted and the Check() method returned false.</i></p>");
+        //header("Location: " . $_SERVER['PHP_SELF']);
+       # $app->redirectTo();
+
+    }
+
+
+		$this->views->add('users/signup',[
+			'form' => $formOrMessage,
+			], 'main');
+	}
+
+	public function testForUserWithUsername($value) {
+		if( $value != "") {
+			$item = $this->users->findByAcronym($value);
+			if($item) {
+				return false;
+			}
+			return true;
+		}
+	}
+
+	public function testForUserWithEmail($value) {
+		if( $value != "") {
+			$item = $this->users->findByEmail($value);
+			if($item) {
+				return false;
+			}
+			return true;
+		}
+	}
+
+	public function testPassword($value) {
+		if( $value !="") {
+			if( strlen($value) >= 6) {
+				if( preg_match("/\d/", $value) && preg_match("/[a-z]/i", $value)) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+	
+
+	private function getSignupForm() {
+		$di = $this;
+		$form = $this->form->create([], [
+        'arconym' => [
+            'type'        => 'text',
+            'label'       => 'Användarnamn',
+            'required'    => true, 
+            'maxlength'   => 20,
+            'validation'  => array(
+            	'not_empty',
+	            'custom_test' => array(
+	            		'message' => 'Användarnamnet används redan', 
+	            		'test' => array($this, 'testForUserWithUsername')
+	            )
+            )
+        ],
+        'email' => [
+        	'label'       => 'E-post',
+            'type'        => 'text',
+            'required'    => true,
+            'validation'  => array(
+            	'not_empty', 'email_adress',
+	            'custom_test' => array(
+	            		'message' => 'En användare med denna e-post finns redan', 
+	            		'test' => array($this, 'testForUserWithEmail')
+	            )
+	           ),
+        ],
+        'name' => [
+            'type'        => 'text',
+            'label'       => 'Namn',
+            'maxlength'   => 80,
+            'required'    => false,
+            'validation'  => ['not_empty'],
+        ],
+        'password' => [
+            'type'        => 'password',
+            'required'    => true,
+            'maxlength'   => 60,
+            'validation'  => array('not_empty',
+	            'custom_test' => array(
+	            		'message' => 'Lösenordet måste vara minst 6 tecken långt och innehålla minst en siffra och en bokstav', 
+	            		'test' => array($this, 'testPassword')
+	            )),
+        ],
+        'submit' => [
+        		'value' 		=> 'Bli medlem',
+            'type'      => 'submit',
+            'callback'  => function ($form) use ($di) {
+//
+            		$now = date('Y-m-d H:i:s');
+					    	$di->users->create(array(
+					    		'acronym' => $form->Value('arconym'),
+					    		'email' => $form->Value('email'),
+					    		'name' => $form->Value('name'),
+					    		'password' => password_hash($form->value('password'), PASSWORD_DEFAULT),
+					    		'created' => $now,
+					    		'updated' => $now,
+					    		'active' => $now,
+					    		'is_admin' => 0
+					    	));
+
+					    	if( $di->users->id ) {
+					    		if( !$di->userContext->loginUserById($di->users->id)) {
+					    			$form->AddOutput('Du kunde inte loggas in. Försök igen senare.');
+					    			return false;
+					    		}
+					    	} else {
+					    		$form->AddOutput('Användaren kunde inte skapas. Försök igen senare.');
+					    		return false;
+					    	}
+                return true;
+            }
+        ]
+    ]);
+		return $form;
+	}
+
 	/**
 	* Initialize the controller.
 	*
