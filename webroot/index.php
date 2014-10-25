@@ -8,9 +8,6 @@ $app->navbar->configure(ANAX_APP_PATH . 'config/navbar_nuffsaid.php');
 $app->url->setUrlType(\Anax\Url\CUrl::URL_CLEAN);
 $app->session(); 
 
-$di->set('form', 'Mos\HTMLForm\CForm');
-
-$app->views->addString('<p>Spelaihop är sidan där spelintresserade kan ställa frågor om alla möjliga spel och få svar.</p>', 'footer-col-1');
 
 
 // Include database support
@@ -20,6 +17,18 @@ $di->setShared('db', function() {
     $db->connect();
     return $db;
 });
+
+$di->set('form', 'Mos\HTMLForm\CForm');
+
+// Include database support
+$di->setShared('userContext', function() {
+    $ctx = new  \Anax\UserContext\UserContext();
+//    $db->setOptions(require ANAX_APP_PATH . 'config/database_sqlite.php');
+    return $ctx;
+});
+
+$app->views->addString('<p>Spelaihop är sidan där spelintresserade kan ställa frågor om alla möjliga spel och få svar.</p>', 'footer-col-1');
+
 
 
 $app->router->add('', function() use ($app, $di) {
@@ -35,9 +44,23 @@ $app->router->add('', function() use ($app, $di) {
 $app->router->add('questions', function() use ($app, $di) {
   $app->theme->setTitle("Frågor");
   $app->views->add('shared/page', [
-      'content' => "frågor",
+      'content' => <<<EOD
+
+
+  <div class="tabs-container">
+    <ul class="tabs">
+      <li class="text">yo yo</li>
+      <li class="last"><h5><a href="">Mest uppskattade</a></h5></li>
+      <li><h5><a href="">Aktiva</a></h5></li>
+      <li class="active"><h5><a href="">Nyaste</a></h5></li>
+    </ul>
+  </div>
+
+  <p>&nbsp;</p>
+EOD
+,
       'byline' => "byline",
-      'sidebar' => "sidebar"
+      'sidebar' => "sidebasdar"
   ]);
 });
 
@@ -45,9 +68,7 @@ $app->router->add('questions', function() use ($app, $di) {
 $app->router->add('tags', function() use ($app, $di) {
   $app->theme->setTitle("Taggar");
   $app->views->add('shared/page', [
-      'content' => "tagar",
-      'byline' => "byline",
-      'sidebar' => "sidebar"
+      'content' => "tagar"
   ]);
 });
 

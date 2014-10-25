@@ -31,6 +31,12 @@ return [
             'sort' => -1
         ],
         [
+            'region' => 'toolbar',
+            'template' => 'shared/toolbar',
+            'data' => [],
+            'sort' => -1
+        ],
+        [
             'region' => 'footer', 
             'template' => 'shared/footer', 
             'data' => [], 

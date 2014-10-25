@@ -1,3 +1,7 @@
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dlid/nuffsaid-mvc/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dlid/nuffsaid-mvc/?branch=master)[![Code Coverage](https://scrutinizer-ci.com/g/dlid/nuffsaid-mvc/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/dlid/nuffsaid-mvc/?branch=master)[![Build Status](https://scrutinizer-ci.com/g/dlid/nuffsaid-mvc/badges/build.png?b=master)](https://scrutinizer-ci.com/g/dlid/nuffsaid-mvc/build-status/master)
+
+
 nuffsaid-mvc
 ============
 

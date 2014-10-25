@@ -16,7 +16,7 @@
 
 <nav id="toolbar">	
 	<div class="row">
-		mg
+		<?php $this->views->render('toolbar')?>
 	</div>
 </nav>
 
@@ -95,8 +95,9 @@
 			<?php $this->views->render('sidebar')?>
 			</div>
 		<?php endif; ?>
-	</div>
 
+	</div>
+<?php $this->views->render('sidebar')?>
 	<?php if ($this->views->hasContent('main-footer')) : ?>
 		<div class="row content-block content-main">
 			<div class="col-wide">
@@ -104,7 +105,6 @@
 			</div>
 		</div>
 	<?php endif; ?>
-
 
 
 </div>

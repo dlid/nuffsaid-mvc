@@ -3,9 +3,9 @@
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
      #main {
-        .column(@columns / 3 * 2);
+        .column(@columns - @sidebarColumnCount);
         &.wide {
-        .column(@columns - 1);
+        .column(@columns );
         }
     }
 
@@ -52,12 +52,12 @@
 
 }
 
-/* Lock width on 960 */
-@media (min-width: 960px) {
+/* Lock width on 980 */
+@media (min-width: 980px) {
     #wrapper,
     #toolbar > .row,
     div.wrapper {
-        max-width: 960px;
+        max-width: 980px;
         margin: 0 auto;
     }
 }
