@@ -1,0 +1,24 @@
+{
+    "name": "dlid/nuffsaid-mvc",    
+    "type": "application",
+    "description": "An Anax-MVC based forum for asking questions and receiving answers",
+    "keywords": ["mvc","application"],
+    "homepage": "https://github.com/dlid/nuffsaid-mvc",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Lidström",
+            "email": "me@dlid.se",
+            "homepage": "http://dlid.se",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "phpmvc/comment": "dev-master",
+        "jimmiw/php-time-ago": "dev-master",
+        "mos/cform": "2.*@dev",
+        "mos/cdatabase": "dev-master",
+        "dlid/cdbyuml": "dev-master"
+    }
+}
