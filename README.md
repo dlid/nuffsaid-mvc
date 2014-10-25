@@ -7,7 +7,7 @@ Built to be similar to StackOverflow as per the [requirements][2] in the course 
 
 The current core implementation of nuffsaid is a swedish chat about gaming.
 
-
+ 
 History
 -----------------------------------
 ###History for nuffsaid-mvc
