@@ -1,6 +1,6 @@
 
 <span class="about">
-	<a href=""><span class="fa fa-info-circle"></span> Om Spelaihop</a>
+	<a href="<?= $this->di->url->create('about') ?>"><span class="fa fa-info-circle"></span> Om Spelaihop</a>
 </span>
 
 <?php if( $this->di->userContext->isLoggedIn() ): ?>
