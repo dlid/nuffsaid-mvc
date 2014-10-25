@@ -1,0 +1,186 @@
+[
+    {
+        "name": "phpmvc/comment",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mosbth/phpmvc-comment.git",
+            "reference": "ea5c43e8bb3f723d6fb69c892500d26c7390eb37"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mosbth/phpmvc-comment/zipball/ea5c43e8bb3f723d6fb69c892500d26c7390eb37",
+            "reference": "ea5c43e8bb3f723d6fb69c892500d26c7390eb37",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "time": "2014-04-02 12:59:02",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Phpmvc\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Mikael Roos",
+                "email": "me@mikaelroos.se",
+                "homepage": "http://mikaelroos.se",
+                "role": "Developer"
+            }
+        ],
+        "description": "Various base classes for comments management",
+        "homepage": "http://dbwebb.se",
+        "keywords": [
+            "comments",
+            "education"
+        ]
+    },
+    {
+        "name": "jimmiw/php-time-ago",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jimmiw/php-time-ago.git",
+            "reference": "3b7100b2a61c750f29455376fd0c0351630517de"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/jimmiw/php-time-ago/zipball/3b7100b2a61c750f29455376fd0c0351630517de",
+            "reference": "3b7100b2a61c750f29455376fd0c0351630517de",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=4"
+        },
+        "time": "2014-06-25 07:11:41",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "timeago.inc.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jimmi Westerberg",
+                "homepage": "http://www.westsworld.dk",
+                "role": "Developer"
+            }
+        ],
+        "description": "Simple module, that displays the date in a \"time ago\" format",
+        "homepage": "https://github.com/jimmiw/php-time-ago",
+        "keywords": [
+            "distance of time",
+            "time ago",
+            "time ago in words"
+        ]
+    },
+    {
+        "name": "mos/cform",
+        "version": "2.x-dev",
+        "version_normalized": "2.9999999.9999999.9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mosbth/cform.git",
+            "reference": "c631276a9e0f97cc725f56e7744a703974a4767f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mosbth/cform/zipball/c631276a9e0f97cc725f56e7744a703974a4767f",
+            "reference": "c631276a9e0f97cc725f56e7744a703974a4767f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "time": "2014-06-04 10:53:04",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Mos\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Mikael Roos",
+                "email": "me@mikaelroos.se",
+                "homepage": "http://mikaelroos.se",
+                "role": "Developer"
+            }
+        ],
+        "description": "Classes for HTML Forms",
+        "homepage": "http://dbwebb.se/",
+        "keywords": [
+            "Forms",
+            "education",
+            "html"
+        ]
+    },
+    {
+        "name": "mos/cdatabase",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mosbth/cdatabase.git",
+            "reference": "bc8627e364e632253cf8ccbdc78efc70b3c772c9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mosbth/cdatabase/zipball/bc8627e364e632253cf8ccbdc78efc70b3c772c9",
+            "reference": "bc8627e364e632253cf8ccbdc78efc70b3c772c9",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "time": "2014-05-19 07:48:35",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Mos\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Mikael Roos",
+                "email": "me@mikaelroos.se",
+                "homepage": "http://mikaelroos.se",
+                "role": "Developer"
+            }
+        ],
+        "description": "PHP classes for database handling upon PDO",
+        "homepage": "http://dbwebb.se",
+        "keywords": [
+            "education",
+            "framework",
+            "micro",
+            "module",
+            "mvc"
+        ]
+    }
+]

@@ -1,0 +1,84 @@
+
+  form fieldset {
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 0em .5em .5em 24px;
+    margin: 0 0 1em 0;
+    background: #ddd;
+    border: none;
+    background-image: url(../../img/fieldset-rectangle.png);
+    background-repeat: no-repeat;
+    background-position: -10px -80px;
+  }
+  form fieldset legend, form fieldset legend span {
+      display: block;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+  }
+  form fieldset legend {
+      /*top: -2em;
+      left: -.5em;*/
+      padding: 0;
+      font-size: 1.1em;
+      font-weight: bold;
+  }
+  form fieldset legend span {
+      padding: .1em 0;
+      color: #000000;
+      background: #DDEEFF;
+      text-indent: .5em;
+  }
+
+  fieldset p {
+    margin: @magicNumber / 2 0;
+  }
+
+  form label {
+    line-height: 2em;
+    font-size: @fontSizeSmall;
+  }
+
+
+  form {
+
+    input {
+
+      &[type=text],
+      &[type=email],
+      &[type=number] {
+        font-size: @fontSizeSmall;
+        padding: 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+      }
+
+      &.validation-failed {
+        border-color: red;
+      }
+
+    }
+
+    ul.validation-message {
+      margin: 0 0 0 0px;
+      font-size: @fontSizeSmall;
+      color: red;
+    }
+
+  }
+
+  /* CSS Hack for Gecko browsers to get it to render the legend in the right place */
+  @-moz-document url-prefix() {
+      form fieldset legend span {
+          top: -2em;
+          left: -.5em;
+      }
+  }

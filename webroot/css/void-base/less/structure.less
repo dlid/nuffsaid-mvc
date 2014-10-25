@@ -1,0 +1,293 @@
+
+html {
+     background-color: @bgColorHtml;
+    font-family: @fontFamilyBody;
+    font-size: @fontSizeBody;
+}
+
+
+
+
+#wrapper {
+  margin: 0 auto; 
+  overflow: hidden;
+}
+
+#MainBanner {
+ background-repeat: no-repeat; 
+ height:136px; 
+ padding-top: 130px;
+ padding-bottom:0;
+ background-position: 50% 0;
+}
+
+#MainBannerPolygon {
+    background-image: url(../../img/top-banner-polygon.png);
+    background-repeat: no-repeat; 
+    background-position: -280px 0;
+    height: 134px;
+}
+
+#header {
+    .clearfix();
+    color: #fff;
+}
+
+.src-container {
+    font-size: 12px;
+}
+
+
+h1 {
+    font-size: @fontSizeH1;
+    font-weight: 300;
+    line-height: @lineHeightH1;
+    margin:@magicNumber 0;
+    padding:0;
+}
+
+h2 {
+    font-size: @fontSizeH2;
+    font-weight: 300;
+    line-height: @lineHeightH2;
+    margin:0;
+    padding:0;
+}
+
+h3 {
+    font-size: @fontSizeH3;
+    line-height: @lineHeightH3;
+    margin:0;
+    padding:0;
+    font-weight: 300;
+}
+
+h4 {
+    font-size: @fontSizeH4;
+    line-height: @lineHeightH4;
+    margin:0;
+    padding:0;
+    font-weight: 300;
+}
+
+h5 {
+    font-size: @fontSizeH5;
+    line-height: @lineHeightH5;
+    margin:0;
+    padding:0;
+    font-weight: 300;
+}
+
+h6 {
+    font-size: @fontSizeH6;
+    line-height: @lineHeightH6;
+    margin:0;
+    padding:0;
+    font-weight: 300;
+}
+
+p {
+    margin: @magicNumber 0;
+}
+
+article h2 {
+    margin-top:1.5em;
+    font-weight: 300;
+    background-color: #eee;
+    margin-left: -20px;
+    padding-left: 19px;
+    margin-right: -20px;
+    background-color: #874839;
+    color: #fff;
+}
+
+
+/* Some common grid classes */
+
+.row {
+     padding-bottom: @magicNumber / 2;
+    .clearfix();
+
+    &.content-block {
+         background-color: @bgColorBody;
+        
+
+        
+    }
+
+}
+
+
+#header,
+#navbar,
+#flash,
+#footer {
+    display:block;
+    float: none;
+    p {
+        margin: 0;
+    }
+
+    .social {
+        img {
+            margin-right: 4px;
+            width: 32px;
+        }
+    }
+}
+
+#navbar {
+    font-weight: 300; 
+}
+
+#footer {
+    padding: 4em 0.8em 3em 0.8em;
+    background-color:#404040;
+    color:#fff;
+    font-size: @fontSizeSmall;
+
+    background-repeat: no-repeat; 
+    display:block; 
+    background-image: url(../../img/footer-rectangle.png); background-position: 68%   -2px; 
+
+    a {
+        color: #fff;
+    }
+
+}
+
+.content-flash {
+    color: #fff;
+
+    margin-bottom: 0;
+    padding: 16px;
+
+    h1 {
+        margin: 0 0 4px 0;
+        font-size: 1em;
+        font-weight: 600;
+    }
+
+    p {
+        margin:0;
+        padding:0;
+        font-weight: 300;
+        font-size: @fontSizeSmall;
+    }
+
+    &+.content-main {
+        padding-top: @magicNumber/2;
+    }
+
+    &.flash-warning {
+        background-color: orange;
+
+    }
+
+    &.flash-info {
+        background-color: #0099ff;;
+    }
+
+    &.flash-danger {
+        background-color: #900;
+    }
+
+    &.flash-success {
+        background-color: #090;
+    }
+
+}
+
+.content-banner {
+    display:block;
+    margin-bottom: 0;
+    padding-bottom: @magicNumber ;
+
+    & + .content-main {
+        padding-top: 0;
+    }
+}
+
+ 
+#header {
+    margin-bottom: @magicNumber * .25;
+    margin-top: @magicNumber * .25;
+    .sitelogo {
+        width: 40px;
+        vertical-align: middle;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .sitetitle {
+        display: block;
+        font-size: 0.85em;
+    }
+    .siteslogan {
+        font-size: .70em;
+    }
+
+     .siteslogan:before {
+        content: ' ';
+        clear: right;
+        display: block;
+    }
+}
+
+.col-wide {
+   .column(@columns);
+}
+
+.content-main {
+    padding-top: @magicNumber;
+}
+
+#main {
+    .column(@columns );
+
+}
+
+
+#sidebar {
+    .column(@columns / 3);
+}
+ 
+#featured-1,
+#featured-2,
+#featured-3,
+#triptych-1,
+#triptych-2,
+#triptych-3 {
+    .column(@columns / 3);
+    margin-bottom: @magicNumber;
+    padding-bottom: @magicNumber * 2;
+}
+ 
+#footer-col-1,
+#footer-col-2,
+#footer-col-3, 
+#footer-col-4 {
+    .column(@columns );
+}
+
+
+
+blockquote { 
+    font-weight: 300;
+}
+
+table {
+    border-color: #414141;background-color: #fff;
+
+    td, th {
+        padding: (@magicNumber * 0.5) 8px;
+    }
+
+        tbody {
+                tr {
+                &:nth-child(even) {background: #FFF}
+                &:nth-child(odd) {background: #eee}
+            }
+        }
+}
+ 

@@ -1,0 +1,69 @@
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+     #main {
+        .column(@columns / 3 * 2);
+        &.wide {
+        .column(@columns - 1);
+        }
+    }
+
+    #header {
+        margin-bottom: @magicNumber;
+        margin-top: @magicNumber ;
+        .sitelogo {
+            width: initial;
+        }
+        .sitetitle {
+            margin-top: @magicNumber / 2;
+            font-size: 2em;
+        }
+        .siteslogan {
+            font-size: 1em;
+        }
+    }
+
+
+    #MainBanner {
+     background-position: 0 0;
+      height:136px; 
+
+    }
+
+    #MainBannerPolygon {
+        background-position: 0 0;
+        height: 134px;
+    }
+
+    #footer-col-1,
+    #footer-col-2,
+    #footer-col-3,
+    #footer-col-4 {
+        .column(@columns / 4) ;
+    }
+
+}
+
+/* Lock width on 960 */
+@media (min-width: 960px) {
+    #wrapper {
+        max-width: 960px;
+    }
+}
+
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 1622px) {
+    #flash {
+        position: absolute;
+        float:left;
+        margin-left: -300px;
+        width: 300px;
+
+        h1 {
+            font-size: 2em;
+            font-weight: 600;
+        }
+    }
+}

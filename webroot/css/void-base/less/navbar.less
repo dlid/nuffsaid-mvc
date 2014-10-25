@@ -1,0 +1,205 @@
+/**
+ * Based on http://dbwebb.se/coachen/en-navbar-med-drop-down-meny-i-ren-html-och-css
+ * Changed to only style li-items instead of a.
+ */
+
+
+.navbar {
+  ul {
+    text-align: center;
+     list-style: none; 
+    margin: 0; 
+    padding: 0;
+    white-space: 1px;
+  }
+
+  > ul {
+    font-size: 0.8em;
+  }
+
+
+  li {
+    &:hover,
+    &:active {
+      > a {
+        color: orange;
+      }
+    }
+
+    &.selected-parent, 
+    &.selected {
+
+      > a {
+        color: orange;
+      }
+       ul {
+        font-size: 1em;
+      }
+    }
+
+    &.selected-parent {
+      > a {
+        color:#fff;
+      }
+
+    }
+
+  }
+
+  > nav {
+    background-color: #414141;
+    font-size: .75em;
+  } 
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 4px 6px;
+    white-space: nowrap; 
+    color: #fff;
+  }
+
+  .icon {
+    font-size: 2em;
+    display:block;
+    text-align: center;
+  }
+
+  .label {
+    display:block;
+    text-align: center;
+    margin-top: 3px;
+  }
+
+
+  ul ul { 
+    padding: 2px 6px 2px 0; 
+    position: absolute; 
+    left: -9999px; 
+    z-index: 2;
+    background-color: #414141;
+  }
+   
+  li li {
+    width: 100%;
+    border-top: none;  
+    border-left: 4px solid transparent;  
+
+  }
+
+  li li a {
+    padding: 0.3em 1em 0.3em 1em;
+  }
+
+  li li:hover {
+  }
+
+   li li.selected {
+    color: #222; 
+  }
+
+
+}
+
+
+
+  .navbar li {
+    display: inline-block;
+    border-top: 4px solid transparent; 
+    color: #333; 
+    position: relative; 
+  }
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+  .navbar {
+
+    > nav {
+      display:none;
+    }
+
+    .label {
+      text-align: left
+    }
+
+    ul {
+      text-align: left ! important;
+      font-size: 1em;
+      text-transform: uppercase;
+    }
+
+    a {
+      padding: 1em;
+    }
+
+
+    li:hover ul {
+      left: 0;
+    }
+
+
+    .icon {display: none;}
+
+  }
+
+  .navbar li.selected-parent, 
+  .navbar li.selected {
+
+    > a {
+      background-image: url(../../img/arrow-orange.png);
+      background-repeat: no-repeat;
+      background-position: 0 50%;
+    }
+
+    &.selected-parent {
+      > a {
+        color:#fff;
+        background-image: url(../../img/arrow-orange-down.png);
+      }
+    }
+
+  }
+
+
+
+}
+
+#sidebar nav ul {
+  background-color: rgb(45, 49, 55);
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: @fontSizeSmall;
+}
+
+#sidebar nav ul a {
+  background: transparent;
+  color: rgb(232, 245, 255);
+  font-size: .9em;
+  text-decoration: none;
+  padding: 6px 0 6px 8px;
+  display: block;
+  border-left: 6px solid transparent;
+}
+
+#sidebar nav ul li:hover {
+  background-color:#393f45;
+}
+
+#sidebar nav li.selected a {
+  border-color: #479ce4;
+  background-color:#393f45;
+}
+
+#sidebar .submenu-header {
+  color:#fff; padding:4px 0 4px 8px; border-left: 6px solid transparent; text-decoration: none; font-weight:bold; display:block; font-size: .9em;  
+  background-color:darken(#737a82, 10%);
+
+  &.selected {
+    border-color:#479ce4;
+    background-color:#737a82;
+  }
+
+}

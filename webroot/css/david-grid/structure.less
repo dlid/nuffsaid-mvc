@@ -1,0 +1,78 @@
+
+#wrapper {
+  max-width: 960px;
+  margin: 0 auto; 
+  overflow: hidden;
+}
+
+#header,
+#navbar,
+#flash,
+#footer {
+    .column(@columns);
+}
+ 
+#header {
+    margin-bottom: @magicNumber;
+    margin-top: @magicNumber / 2;
+    .sitelogo {
+        vertical-align: middle;
+        float: left;
+    }
+
+    .sitetitle {
+        display: block;
+        font-size: 2em;
+        padding-top: 0.5em;
+    }
+
+     .siteslogan:before {
+        content: ' ';
+        clear: right;
+        display: block;
+    }
+}
+
+#main {
+    .column(@columns / 3 * 2);
+    padding-bottom: @magicNumber * 2;
+
+    // Class for when the main content has no sidebar
+    &.wide {
+        .column(@columns);
+    }
+
+}
+ 
+#sidebar {
+    .column(@columns / 3);
+    padding-bottom: @magicNumber * 2;
+}
+ 
+#featured-1,
+#featured-2,
+#featured-3,
+#triptych-1,
+#triptych-2,
+#triptych-3 {
+    .column(@columns / 3);
+    margin-bottom: @magicNumber;
+    padding-bottom: @magicNumber * 2;
+}
+ 
+#footer-col-1,
+#footer-col-2,
+#footer-col-3, 
+#footer-col-4 {
+    .column(@columns / 4);
+    padding-bottom: @magicNumber * 2;
+}
+
+#wrap-featured,
+#wrap-flash,
+#wrap-main,
+#wrap-triptych,
+#wrap-footer-col  {
+    margin-bottom: @magicNumber;
+    .clearfix();
+} 
