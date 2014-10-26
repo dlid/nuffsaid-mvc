@@ -8,9 +8,6 @@ return [
     // Use for styling the menu
     'class' => 'navbar',
 
-    // We only want to show two levels in the top navigation
-    'maxDepth' => 2,
- 
     // Here comes the menu strcture
     'items' => [
 
@@ -51,7 +48,9 @@ return [
  
     // Callback tracing the current selected menu item base on scriptname
     'callback' => function($url) {
-        if ($url == $this->di->get('request')->getRoute()) {
+        if ( $url == $this->di->get('request')->getRoute()) {
+            return true; 
+        } else if($url && strpos($this->di->get('request')->getRoute(), $url) === 0) {
             return true;
         }
     },

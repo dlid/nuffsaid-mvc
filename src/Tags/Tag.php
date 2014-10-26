@@ -39,17 +39,17 @@ class Tag extends \Anax\MVC\CDatabaseModel
 		return $this->db->fetchAll();
 	}
 
-	public function ensureTag($tags) {
+	public function ensureTag($tag) {
 
-		if(!is_numeric($tags['id'])) {
+		if(!is_numeric($tag->id)) {
 			$this->create(array(
-				'name' => $tags['text'],
-				'slug' => $tags['slug'],
+				'name' => $tag->name,
+				'slug' => $tag->slug,
 				'created' => date('Y-m-d H:i:s')
 			));
 			return $this->id;
 		} else {
-			return $tags['id'];
+			return $tag->id;
 		}
 
 		dump($tags);
@@ -127,8 +127,10 @@ class Tag extends \Anax\MVC\CDatabaseModel
 		$slug = str_replace('€', 'euro', $slug);
 		$slug = str_replace('!', 'exclaim', $slug);
 		$slug = preg_replace("/[^a-z0-9-]/", '-', $slug);
-		$slug = preg_replace("/-{2, }/", '-', $slug);
+		$slug = preg_replace("/-{2,}/", '-', $slug);
 		$slug = trim($slug, '-');
+
+
 
 		return $slug;
 
@@ -163,8 +165,9 @@ class Tag extends \Anax\MVC\CDatabaseModel
 						$newItems[] = $slug;
 						$ret['items'][] = array(
 							'id' => $item, 
-							'text' => urldecode(substr($item, 1)),
-							'slug' => $this->createSlug(urldecode(substr($item, 1)))
+							'name' => urldecode(substr($item, 1)),
+							'slug' => $this->createSlug(urldecode(substr($item, 1))),
+							'url' => null
 						);
 				}
 			}

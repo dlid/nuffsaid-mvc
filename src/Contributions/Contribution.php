@@ -45,9 +45,38 @@ class Contribution extends \Anax\MVC\CDatabaseModel
 		
 		$this->db->execute(['QUERY']);
 		$rows = $this->db->fetchAll();
+		$this->attachAvatar($rows);
 		$this->attachUrl($rows);
 		$this->attachTags($rows);
 		return $rows;
+	}
+
+	public function find($id) {
+
+		$columns = array(
+			'ns_contribution.id',
+			'ns_contribution.created',
+			'ns_contribution.thread_updated',
+			'ns_contribution.title',
+			'ns_contribution.body',
+			'ns_contribution.thread_updated',
+			'email',
+			'acronym',
+			'name'
+		);
+
+		$this->db->select( implode(',', $columns) )	
+			->from($this->getSource())
+			->where('ns_contribution.id = ?')
+			->join('user', 'user_id=ns_user.id')
+			->orderBy('ns_contribution.created DESC');
+		
+		$this->db->execute([$id]);
+		$rows = $this->db->fetchAll();
+//		$this->attachUrl($rows);
+		$this->attachTags($rows);
+
+		return count($rows) > 0 ? $rows[0] : null;
 	}
 
 	public function attachUrl(&$rows) {
@@ -56,6 +85,15 @@ class Contribution extends \Anax\MVC\CDatabaseModel
 			$row->calculatedUrl = $this->url->create('questions/view/' . $row->id . '/' . $tagMgr->createSlug($row->title));
 		}
 	}
+
+	public function attachAvatar(&$rows) {
+		$tagMgr = new \Anax\Tags\Tag();
+		foreach( $rows as &$row ){
+			$row->avatar = 'http://www.gravatar.com/avatar/' . md5($row->email) . '.jpg?s=32';
+		}
+	}
+
+	
 
 	public function attachTags(&$rows) {
 		$ids = array();

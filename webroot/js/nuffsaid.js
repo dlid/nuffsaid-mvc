@@ -57,6 +57,9 @@ $(function() {
 
 
 	$(document).on('focus', 'input[data-helpbox], textarea[data-helpbox]', activateHelpbox);
+	$(document).on('blur', 'input[data-helpbox][data-helpbox-toggle], textarea[data-helpbox][data-helpbox-toggle]', deactivateHelpbox);
+
+
 
 	if($("#e1").length ==1) {
 	 $("#e1").select2({
@@ -190,10 +193,12 @@ function activateHelpbox(e) {
 	      .done(function(a) {
 						newHelpbox.fadeIn('fast');
 				});
-		}
-		
-		
+		}		
 	}
+}
+
+function deactivateHelpbox(e) {
+	//console.warn("AAJAJA");
 }
 
 

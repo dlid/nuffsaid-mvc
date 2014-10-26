@@ -11,7 +11,7 @@ class QuestionsController implements \Anax\DI\IInjectionAware
 	use \Anax\DI\TInjectable;
 
 	public function indexAction() {
-		$this->theme->setTitle("aaa");
+		$this->theme->setTitle("Frågor");
 
 
 		$ctb = new \Anax\Contributions\Contribution();
@@ -23,46 +23,39 @@ class QuestionsController implements \Anax\DI\IInjectionAware
 		$this->views->add('question/list', [
 			'items' => $recent ], 'main');
 
-		$this->views->addString('x', 'sidebar');
-
-
-/*
-
-
-  <div class="tabs-container">
-    <ul class="tabs">
-      <li class="text">yo yo</li>
-      <li class="last"><h5><a href="">Mest uppskattade</a></h5></li>
-      <li><h5><a href="">Aktiva</a></h5></li>
-      <li class="active"><h5><a href="">Nyaste</a></h5></li>
-    </ul>
-  </div>
-
-  <p>&nbsp;</p>
-
- */
+		$this->views->addString(' ', 'sidebar');
 
 	}
 
 	public function viewAction($id, $slug = null) {
-		$this->theme->setTitle($id);
-	}
+		
+		$ctb = new \Anax\Contributions\Contribution();
+		$ctb->setDi($this->di);
 
+		$row = $ctb->find($id);
 
-	public function searchAction() {
+		$this->theme->setTitle(htmlentities($row->title, null, 'utf-8'));
+		$this->views->addString('
+<div id="current-post-info">
+	meh
+</div>
+			<div id="help-commenting" class="helpbox hidden">
+<h2>Kommentarer</h2>
+<p class="pre">När du behöver mer information</p>
+<hr />
+<p>I kommentarer kan du diskutera och fråga om mer detaljer. Använd t.ex.
+kommentarer när du beöver mer information för att kunna ge ett svar.</p>
+</div>','sidebar');
+		$this->views->add('question/display-single', [
+			'title' => htmlentities($row->title, null, 'utf-8'),
+			'text' => $this->filter->doFilter($row->body, 'markdown'),
+			'avatar' => 'http://www.gravatar.com/avatar/' . md5($row->email) . '.jpg?s=32',
+			'created' => $row->created,
+			'username' => $row->acronym,
+			'tags' => $row->tags,
+			'currentuser_avatar' => 'http://www.gravatar.com/avatar/' . md5($this->userContext->getUserEmail()) . '.jpg?s=24',
+		], 'main');
 
-		header("Content-Type: application/json");
-
-		echo json_encode( array( 
-			array('id' => 0, 'text' => 'Desiny'),
-			array('id' => 1, 'text' => 'Mariokart 8'),
-			array('id' => 2, 'text' => 'Skyrim'),
-			array('id' => 3, 'text' => 'Batman Arkham Asylum'),
-			array('id' => 4, 'text' => 'Playstation 4'),
-			array('id' => 5, 'text' => 'XBox 360'),
-			array('id' => 6, 'text' => 'PC'),
-			 )) ;
-		exit;
 
 	}
 
@@ -172,7 +165,7 @@ class QuestionsController implements \Anax\DI\IInjectionAware
 
 						$tag_ids = [];
 						foreach($tagData->items as $tag) {
-							$tag_ids[] = $tagMgr->ensureTag($tag);
+							$tag_ids[] = $tagMgr->ensureTag((object)$tag);
 						}
 
 						$ctb->setTags($tag_ids);
@@ -216,7 +209,7 @@ class QuestionsController implements \Anax\DI\IInjectionAware
 
 			$previewTagData = array();
 			foreach( $tagData->items as $td) {
-					$previewTagData[] = $td;
+					$previewTagData[] = (object)$td;
 			}
 
 			$this->views->add('question/display-single', array(
