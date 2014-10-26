@@ -10,12 +10,20 @@ $app->session();
 
 $di->set('UsersController', '\Anax\Users\UsersController');
 $di->set('QuestionsController', '\Anax\Questions\QuestionsController');
+$di->set('TagsController', '\Anax\Tags\TagsController');
+$di->set('AboutController', '\Anax\About\AboutController');
 
 // Include database support
 $di->setShared('db', function() {
     $db = new \Mos\Database\CDatabaseBasic();
     $db->setOptions(require ANAX_APP_PATH . 'config/database_sqlite.php');
     $db->connect();
+    return $db;
+});
+
+// Include database support
+$di->setShared('filter', function() {
+    $db = new \Anax\Content\CTextFilter();
     return $db;
 });
 
@@ -40,52 +48,6 @@ $app->router->add('', function() use ($app, $di) {
 	]);
 });
 
-
-$app->router->add('questions', function() use ($app, $di) {
-  $app->theme->setTitle("Frågor");
-  $app->views->add('shared/page', [
-      'content' => <<<EOD
-
-
-  <div class="tabs-container">
-    <ul class="tabs">
-      <li class="text">yo yo</li>
-      <li class="last"><h5><a href="">Mest uppskattade</a></h5></li>
-      <li><h5><a href="">Aktiva</a></h5></li>
-      <li class="active"><h5><a href="">Nyaste</a></h5></li>
-    </ul>
-  </div>
-
-  <p>&nbsp;</p>
-EOD
-,
-      'byline' => "byline",
-      'sidebar' => "sidebasdar"
-  ]);
-});
-
-
-$app->router->add('tags', function() use ($app, $di) {
-  $app->theme->setTitle("Taggar");
-  $app->views->add('shared/page', [
-      'content' => "tagar"
-  ]);
-});
-
-
-$app->router->add('about', function() use ($app, $di) {
-$app->theme->setTitle("Me");
- 
-  $content = $app->fileContent->get('me.md');
-  $content = $app->textFilter->doFilter($content, 'shortcode, markdown');
-
-  $app->views->add('shared/page', [
-      'content' => $content,
-      'sidebar' => ""
-  ]);
-});
-
-  
 
 if( $di->request->getGet(null) == "show_grid" ) {
   $app->theme->addStylesheet('css/void-base/show-grid.css');

@@ -1,4 +1,4 @@
-a:4:{s:4:"root";s:10:"style.less";s:8:"compiled";s:42178:"html {
+a:4:{s:4:"root";s:10:"style.less";s:8:"compiled";s:44637:"html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -1869,6 +1869,7 @@ html {
   margin: 0 auto;
   overflow: hidden;
   background-color: #fff;
+  padding: 0 20px;
 }
 #header {
   *zoom: 1;
@@ -1898,8 +1899,137 @@ html {
   vertical-align: middle;
   margin-top: -4px;
 }
+p.compact {
+  margin: 0;
+  padding: 0;
+}
+.center {
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+.ns-header {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 11px;
+  margin-bottom: 11px;
+}
+.ns-contribution-item .ns-panel {
+  display: inline;
+  float: left;
+  width: 6.25%;
+  margin: 0 1.0416666666667%;
+}
+.ns-contribution-item .ns-content {
+  font-size: 0.875em;
+  display: inline;
+  float: left;
+  width: 89.583333333333%;
+  margin: 0 1.0416666666667%;
+}
+.ns-contribution-item .ns-content > *:first-child {
+  margin-top: 0;
+}
+.ns-contribution-item .ns-content blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 1em 10px 0.2em 10px;
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+.ns-contribution-item .ns-content blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.5em;
+}
+.ns-contribution-item .ns-content blockquote p {
+  display: inline;
+}
+.ns-contribution-item .ns-meta {
+  display: inline;
+  float: left;
+  width: 89.583333333333%;
+  margin: 0 1.0416666666667%;
+  margin-left: 9.375%;
+  text-align: right;
+}
+.ns-contribution-item .ns-footer {
+  display: inline;
+  float: left;
+  width: 89.583333333333%;
+  margin: 0 1.0416666666667%;
+  margin-left: 9.375%;
+  color: #888;
+  font-size: 0.875em;
+  font-family: sans-serif;
+}
+a {
+  color: #07c;
+}
+a:hover {
+  color: #07c;
+  text-decoration: underline;
+}
+.ns-tag {
+  background-color: #b3cee1;
+  color: #333;
+  padding: 4px 6px;
+  font-size: 0.875em;
+  text-decoration: none;
+}
+.ns-tag:hover {
+  background-color: #c5dae8;
+  color: #333;
+  text-decoration: none;
+}
+.ns-contribution-list .ns-contribution-item {
+  margin-bottom: 0.5em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #eee;
+}
+.ns-contribution-list .title {
+  display: block;
+  font-size: 1.25em;
+  margin-bottom: 0.25em;
+  text-decoration: none;
+}
+.ns-contribution-list .title:hover {
+  text-decoration: underline;
+}
+.ns-tag-new {
+  background-color: #eee ! important;
+}
+a + .fa {
+  font-size: .85em ! important;
+}
 form output {
   color: red;
+}
+.helpbox {
+  font-family: sans-serif;
+  font-size: .9em;
+  background-color: #faf6eb;
+  padding: 6px;
+  border: 1px solid #ffd800;
+  color: #414141;
+  line-height: 1.5em;
+  margin-bottom: 1em;
+}
+.helpbox h2 {
+  margin-top: 0;
+}
+.helpbox .fa-ul {
+  margin-left: 4px;
+}
+.helpbox .fa-ul li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5;
+}
+p.pre {
+  font-weight: bold;
 }
 .row {
   padding-bottom: 11px;
@@ -1942,7 +2072,7 @@ form output {
 }
 .content-flash {
   color: #fff;
-  margin-bottom: 0;
+  margin-bottom: 1em;
   padding: 16px;
 }
 .content-flash h1 {
@@ -2023,7 +2153,7 @@ form output {
 #sidebar {
   display: inline;
   float: left;
-  width: 23.416666666667%;
+  width: 27.5%;
   margin: 0 1.0416666666667%;
 }
 #toolbar {
@@ -2234,7 +2364,7 @@ table tbody tr:nth-child(odd) {
   #main {
     display: inline;
     float: left;
-    width: 72.416666666667%;
+    width: 68.333333333333%;
     margin: 0 1.0416666666667%;
   }
   #main.wide {
@@ -2281,11 +2411,11 @@ table tbody tr:nth-child(odd) {
     margin: 0 1.0416666666667%;
   }
 }
-@media (min-width: 980px) {
+@media (min-width: 940px) {
   #wrapper,
   #toolbar > .row,
   div.wrapper {
-    max-width: 980px;
+    max-width: 940px;
     margin: 0 auto;
   }
 }
@@ -2680,4 +2810,4 @@ pre {
   background-color: #eee;
   padding: 6px;
 }
-";s:5:"files";a:24:{s:83:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\style.less";i:1414278994;s:92:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\normalize.less";i:1411063657;s:87:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\grid.less";i:1411065262;s:114:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\font-awesome.less";i:1411073527;s:111:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\variables.less";i:1411073527;s:108:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\mixins.less";i:1411073527;s:106:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\path.less";i:1411073527;s:106:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\core.less";i:1411073527;s:108:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\larger.less";i:1411073527;s:113:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\fixed-width.less";i:1411073527;s:106:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\list.less";i:1411073527;s:117:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\bordered-pulled.less";i:1411073527;s:110:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\spinning.less";i:1411073527;s:117:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\rotated-flipped.less";i:1411073527;s:109:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\stacked.less";i:1411073527;s:107:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\icons.less";i:1411073527;s:92:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\variables.less";i:1414249182;s:92:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\structure.less";i:1414276277;s:93:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\responsive.less";i:1414259508;s:89:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\navbar.less";i:1414246372;s:87:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\form.less";i:1414261295;s:89:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\figure.less";i:1403039119;s:91:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\comments.less";i:1412513111;s:91:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\elements.less";i:1411320979;}s:7:"updated";i:1414279127;}
+";s:5:"files";a:24:{s:83:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\style.less";i:1414278994;s:92:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\normalize.less";i:1411063657;s:87:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\grid.less";i:1411065262;s:114:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\font-awesome.less";i:1411073527;s:111:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\variables.less";i:1411073527;s:108:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\mixins.less";i:1411073527;s:106:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\path.less";i:1411073527;s:106:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\core.less";i:1411073527;s:108:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\larger.less";i:1411073527;s:113:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\fixed-width.less";i:1411073527;s:106:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\list.less";i:1411073527;s:117:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\bordered-pulled.less";i:1411073527;s:110:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\spinning.less";i:1411073527;s:117:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\rotated-flipped.less";i:1411073527;s:109:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\stacked.less";i:1411073527;s:107:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\font-awesome-4.2.0\less\icons.less";i:1411073527;s:92:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\variables.less";i:1414307157;s:92:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\structure.less";i:1414348771;s:93:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\responsive.less";i:1414309962;s:89:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\navbar.less";i:1414246372;s:87:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\form.less";i:1414261295;s:89:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\figure.less";i:1403039119;s:91:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\comments.less";i:1412513111;s:91:"C:\Dropbox\BTH\public_html\phpmvc\nuffsaid-mvc\webroot\css\nuffsaid-base\less\elements.less";i:1411320979;}s:7:"updated";i:1414348774;}

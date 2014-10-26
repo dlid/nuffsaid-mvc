@@ -11,6 +11,13 @@ class UserContext extends \Anax\MVC\CDatabaseModel
 
 	const SESSION_CONTEXTID = 'UserContextId';
 
+	public function getFormDigest() {
+		if( $this->isLoggedIn() ) {
+			$data = $this->session->get(self::SESSION_CONTEXTID);
+			return md5(implode(',', $data));
+		}
+	}
+
 
 	public function loginUserById($id) {
 
@@ -79,19 +86,22 @@ class UserContext extends \Anax\MVC\CDatabaseModel
 	}
 
 	public function getUserDisplayName() {
-		if($this->name) {
-			return $this->name;
+		if( $this->isLoggedIn() ){
+			if($this->name) {
+				return $this->name;
+			}
+			return $this->acronym;
 		}
-		return $this->acronym;
 	}
 
 	public function getUserEmail() {
-		if($this->email) {
-			return $this->email;
+		if( $this->isLoggedIn() ){
+			if($this->email) {
+				return $this->email;
+			}
 		}
 	}
 
-	
 
 	public function getIsAdmin() {
 		if($this->isLoggedIn()) {

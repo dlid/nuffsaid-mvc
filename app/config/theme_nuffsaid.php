@@ -83,7 +83,7 @@ return [
         'jquery' => 'js/jquery-1.11.1.min.js',
 
         // Array with javscript-files to include
-        'javascript_include' => ['js/nuffsaid.js'],
+        'javascript_include' => ['js/moment.js', 'js/nuffsaid.js'],
 
         // Use google analytics for tracking, set key or null to disable
         'google_analytics' => null,

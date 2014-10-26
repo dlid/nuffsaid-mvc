@@ -63,10 +63,6 @@
 		</div>
 	<?php endif; ?>
 
-
-	
-
-
 	<?php if ($this->views->hasContent('featured-1', 'featured-2', 'featured-3')) : ?>
 	<div class="row content-block">
 	    <div id='triptych-1'><?php $this->views->render('featured-1')?></div>
@@ -84,18 +80,20 @@
 		</div>
 	<?php endif; ?>
 
-
-	<div class="row content-block content-main">
-		<div id='main'<?= !$this->views->hasContent('sidebar') ? ' class="wide"' : null; ?>>
-					<?php if(isset($main)) echo $main?>
-					<?php $this->views->render('main')?>
-				</div>
-		<?php if($this->views->hasContent('sidebar')): ?>
-			<div id='sidebar'>
-			<?php $this->views->render('sidebar')?>
+	<?php if ($this->views->hasContent('sidebar')) : ?>
+		<div class="row content-block content-main">
+			<div id="main">
+				<?php $this->views->render('main')?>
 			</div>
-		<?php endif; ?>
-	</div>
+			<div id="sidebar">
+				<?php $this->views->render('sidebar')?>
+			</div>
+		</div>
+	<?php elseif ($this->views->hasContent('main')): ?>
+		<div class="row content-block content-main">
+			<?php $this->views->render('main')?>
+		</div>
+	<?php endif; ?>
 
 	<?php if ($this->views->hasContent('main-footer')) : ?>
 		<div class="row content-block content-main">

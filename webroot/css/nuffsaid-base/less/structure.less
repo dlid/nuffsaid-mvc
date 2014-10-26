@@ -12,6 +12,7 @@ html {
   margin: 0 auto; 
   overflow: hidden;
   background-color: @bgColorBody;
+  padding: 0 20px;
 }
 
 #header {
@@ -28,9 +29,160 @@ html {
     }
 }
 
+p.compact {
+    margin:0;
+    padding:0;
+    } 
+.center {
+    text-align: center;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+.ns-header {
+
+    border-bottom: 1px solid #ccc;
+    padding-bottom: @magicNumber / 2;
+    margin-bottom: @magicNumber / 2;
+}
+
+
+.ns-contribution-item {
+    
+    .ns-panel {
+        .column(1);
+    }
+
+
+
+    .ns-content {
+        font-size: @fontSizeSmall;
+        .column(11);
+        > *:first-child {
+            margin-top: 0;
+        }
+
+        blockquote {
+          background: #f9f9f9;
+          border-left: 10px solid #ccc;
+          margin: 1.5em 10px;
+          padding:1em 10px 0.2em 10px;
+          quotes: "\201C""\201D""\2018""\2019";
+        }
+        blockquote:before {
+          color: #ccc;
+          content: open-quote;
+          font-size: 4em;
+          line-height: 0.1em;
+          margin-right: 0.25em;
+          vertical-align: -0.5em;
+        }
+        blockquote p {
+          display: inline;
+        }
+        
+    }
+
+    .ns-meta {
+        .column(11);
+        .push(1);
+        text-align: right;
+    }
+
+    .ns-footer {
+        .column(11);
+        .push(1);
+        color: #888;
+        font-size: @fontSizeSmall;
+        font-family: sans-serif;
+    }
+}
+
+a  {
+    color:#07c;
+}
+
+a:hover  {
+    color:#07c;
+    text-decoration: underline;
+}
+
+.ns-tag {
+     background-color: #b3cee1;
+    color: #333;
+    padding:4px 6px;
+    font-size: @fontSizeSmall;
+    text-decoration: none;
+}
+
+.ns-tag:hover {
+    background-color: #c5dae8;
+    color: #333;
+    text-decoration: none;
+
+}
+
+.ns-contribution-list {
+    .ns-contribution-item {
+        margin-bottom: 0.5em;
+        padding-bottom: 0.5em;
+        border-bottom: 1px solid #eee;
+
+
+    }
+
+    .title {
+        display:block;
+        font-size: 1.25em;
+        margin-bottom: 0.25em;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        };
+    }
+}
+
+.ns-tag-new {
+    background-color: #eee ! important;
+}
+
+a + .fa {
+    font-size: .85em ! important;
+}
+
 form output {
     color: red;
 }
+
+    .helpbox {
+        font-family: sans-serif;
+        font-size: .9em; background-color: #faf6eb  ; padding:6px;
+        border:1px solid #ffd800  ;
+        color:#414141;
+        line-height: 1.5em;
+        margin-bottom: 1em;
+
+    }
+    .helpbox h2 {
+        margin-top: 0;
+    }
+    .helpbox .fa-ul {
+        margin-left: 4px;
+    }
+    .helpbox .fa-ul li {
+        margin-top: 0.5em;
+        margin-bottom: 0.5;
+    }
+
+    p.pre {
+        font-weight: bold;
+    }
+
+
 
 /*
 #MainBanner {
@@ -154,7 +306,7 @@ article h2 {
 .content-flash {
     color: #fff;
 
-    margin-bottom: 0;
+    margin-bottom: 1em;
     padding: 16px;
 
     h1 {

@@ -13,7 +13,7 @@ class CDatabaseBasic
 
 
 
-    /**
+    /**t
      * Properties
      */
     private $options;                   // Options used when creating the PDO object
@@ -161,7 +161,17 @@ class CDatabaseBasic
         return $this->stmt->setFetchMode(\PDO::FETCH_CLASS, $class);
     }
 
+    public function begin() {
+        $this->db->beginTransaction();
+    }
 
+    public function commit() {
+        $this->db->commit();
+    }
+
+    public function rollback() {
+        $this->db->rollback();
+    }
 
     /**
      * Load query-history from session if available.
