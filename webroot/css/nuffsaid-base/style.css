@@ -1894,6 +1894,13 @@ html {
   background-color: #313131;
   color: #eee;
 }
+#toolbar img {
+  vertical-align: middle;
+  margin-top: -4px;
+}
+form output {
+  color: red;
+}
 .row {
   padding-bottom: 11px;
   *zoom: 1;
@@ -2668,4 +2675,8 @@ hr:before {
 }
 hr:after {
   background: #f4f4f4;
+}
+pre {
+  background-color: #eee;
+  padding: 6px;
 }

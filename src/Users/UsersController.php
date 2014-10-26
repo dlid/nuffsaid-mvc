@@ -17,6 +17,7 @@ class UsersController implements \Anax\DI\IInjectionAware
 	}
 
 	public function welcomeAction() {
+		$this->theme->setTitle("Välkommen");
 		if( $this->userContext->isLoggedIn() ){
 			$this->views->add('users/welcome', [
 				'name' =>  htmlentities($this->userContext->getUserDisplayName(), null, 'UTF-8')
@@ -42,23 +43,43 @@ class UsersController implements \Anax\DI\IInjectionAware
 		$formOrMessage = $form->getHTML(array('novalidate' => true));
 
     if ($status === true) {
-
-			// What to do if the form was submitted?
-			#$form->AddOUtput("<p><i>Form was submitted and the callback method returned true.</i></p>");
-			# $this->request->redirectTo('users/welcome');
 			header("Location: " . $this->url->create('users/welcome'));
-
-    } else if ($status === false) {
-    
-        // What to do when form could not be processed?
-      //  $form->AddOutput("<p><i>Form was submitted and the Check() method returned false.</i></p>");
-        //header("Location: " . $_SERVER['PHP_SELF']);
-       # $app->redirectTo();
-
-    }
-
+    } 
 
 		$this->views->add('users/signup',[
+			'form' => $formOrMessage,
+			], 'main');
+	}
+
+
+	public function lookatmeAction() {
+		header("Content-Type: application/json");
+		$ret = array();
+
+		// Update last seen for the user, and vacuum expired sessions as well
+		if( $this->userContext->isLoggedIn(true) ){
+			$ret['saw-you'] = $this->userContext->seen;
+		}
+		echo json_encode($ret);
+		exit;
+	}
+
+	public function loginAction() {
+		$this->theme->setTitle("Logga in");
+		$form = $this->getLoginForm();
+
+		$status = $form->check();
+
+		$formOrMessage = $form->getHTML(array('novalidate' => true));
+
+    if ($status === true) {
+			header("Location: " . $this->url->create(''));
+    }else if( $status === false ){
+    	$form->AddOutput("Fel användarnamn eller lösenord");
+    	header('Loation: ' . $this->url->create('users/login'));
+    }
+
+		$this->views->add('users/login',[
 			'form' => $formOrMessage,
 			], 'main');
 	}
@@ -94,7 +115,42 @@ class UsersController implements \Anax\DI\IInjectionAware
 		}
 	}
 
-	
+	private function getLoginForm() {
+		$di = $this;
+		$form = $this->form->create([], [
+        'usernameoremail' => [
+            'type'        => 'text',
+            'label'       => 'Användarnamn eller e-post',
+            'required'    => true, 
+            'maxlength'   => 255,
+            'validation'  => array(
+            	'not_empty'
+            )
+        ],
+        'password' => [
+        	'label'       => 'Lösenord',
+            'type'        => 'password',
+            'required'    => true,
+            'validation'  => array(
+            	'not_empty'
+	           ),
+        ],
+        'submit' => [
+        		'value' 		=> 'Logga in',
+            'type'      => 'submit',
+            'callback'  => function ($form) use ($di) {
+            		if( $di->userContext->login($form->Value('usernameoremail'), $form->Value('password'))) {
+            			return true;
+            		}
+
+            		$form->AddOutput('Felaktigt användarnamn eller lösenord');
+
+                return false;
+            }
+        ]
+    ]);
+		return $form;
+	}
 
 	private function getSignupForm() {
 		$di = $this;

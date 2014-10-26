@@ -87,19 +87,16 @@
 
 	<div class="row content-block content-main">
 		<div id='main'<?= !$this->views->hasContent('sidebar') ? ' class="wide"' : null; ?>>
-			<div class="row"><div class="col-wide">
-				<?php if(isset($main)) echo $main?>
-				<?php $this->views->render('main')?>
-			</div>	
-		</div>
+					<?php if(isset($main)) echo $main?>
+					<?php $this->views->render('main')?>
+				</div>
 		<?php if($this->views->hasContent('sidebar')): ?>
 			<div id='sidebar'>
 			<?php $this->views->render('sidebar')?>
 			</div>
 		<?php endif; ?>
-
 	</div>
-<?php $this->views->render('sidebar')?>
+
 	<?php if ($this->views->hasContent('main-footer')) : ?>
 		<div class="row content-block content-main">
 			<div class="col-wide">
@@ -109,6 +106,7 @@
 	<?php endif; ?>
 
 
+</div>
 </div>
 
 	<footer id='footer'>
@@ -137,6 +135,13 @@
 <?php if(isset($javascript_include)): foreach($javascript_include as $val): ?>
 <script src='<?=$this->url->asset($val)?>'></script>
 <?php endforeach; endif; ?>
+
+<script type="text/javascript">
+var rootUrl = '<?=$this->url->create(""); ?>';
+<?php if( $this->userContext->isLoggedIn() ): ?>
+var lookAtMeUrl = '<?=$this->url->create("users/lookatme"); ?>';
+<?php endif; ?>
+</script>
 
 <?php if(isset($google_analytics)): ?>
 <script>

@@ -33,6 +33,12 @@ return [
             'title' => 'Hitta frågor via taggar'
         ],
 
+        'users'  => [
+            'text'  => 'Användare',   
+            'url'   => 'users',  
+            'title' => 'Hitta användare'
+        ],
+
         'ask'  => [
             'text'  => 'Ställ en fråga',   
             'class' => 'right',

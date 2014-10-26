@@ -61,7 +61,7 @@ class UserContext extends \Anax\MVC\CDatabaseModel
 
 	private function findActiveByToken($token) {
 		#$this->db->setVerbose(true);
-		$this->db->select('ns_usercontext.id,user_id,acronym,name,is_admin,ns_usercontext.created,seen')
+		$this->db->select('ns_usercontext.id,user_id,email,acronym,name,is_admin,ns_usercontext.created,seen')
 	           ->from($this->getSource())
 	           ->join('user', ' user_id = ns_user.id')
 	           ->where("token = ?")
@@ -85,6 +85,23 @@ class UserContext extends \Anax\MVC\CDatabaseModel
 		return $this->acronym;
 	}
 
+	public function getUserEmail() {
+		if($this->email) {
+			return $this->email;
+		}
+	}
+
+	
+
+	public function getIsAdmin() {
+		if($this->isLoggedIn()) {
+			if($this->is_admin) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public function getUserId() {
 		if($this->user_id) {
 			return $this->user_id;
@@ -106,9 +123,22 @@ class UserContext extends \Anax\MVC\CDatabaseModel
 		}
 	}
 
-	public function isLoggedIn() {
+	public function login($username, $password) {
 
-		$this->vacuum();
+		$users = new \Anax\Users\User();
+		$users->setDI($this->di);
+		$user = $users->findByLogin($username, $password);
+		if( $user ) {
+			return $this->loginUserById($user->id);
+		}
+		return false;
+	}
+
+	public function isLoggedIn($vacuum = false) {
+
+		if( $vacuum ) {
+			$this->vacuum();
+		}
 
 		if(isset($this->id)) 
 			return true;

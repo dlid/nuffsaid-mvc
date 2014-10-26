@@ -5,9 +5,17 @@
 
 <?php if( $this->di->userContext->isLoggedIn() ): ?>
 <div class="right">
-	<span class="fa fa-user"></span>&nbsp;<a href="<?= $this->di->url->create('users/profile') ?>"><?= $this->di->userContext->getUserDisplayName() ?></a>
+<?php if($this->di->userContext->getIsAdmin()): ?>
+	<a href="">Administration</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+<?php endif; ?>
+
+	
+
+	<img alt="" src="http://www.gravatar.com/avatar/<?=md5($this->di->userContext->getUserEmail());?>.jpg?s=16"  />
+	<a href="<?= $this->di->url->create('users/profile') ?>"><?= $this->di->userContext->getUserDisplayName() ?></a>
 	&nbsp;&nbsp;&nbsp;
-	<span class="fa fa-star" style="color:yellow"></span> <a href="<?= $this->di->url->create('users/profile/' . $this->di->userContext->getUserId()) ?>/reputation" title="Your reputation"><strong style="color: yellow">331</strong></a>
+	<span class="fa fa-star" style="color:yellow"></span> 
+	<a href="<?= $this->di->url->create('users/profile/' . $this->di->userContext->getUserId()) ?>/reputation" title="Your reputation"><strong style="color: yellow">331</strong></a>
 	&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 	<a href="<?= $this->di->url->create('users/logout') ?>" title="Your reputation">Logga ut</a>
 

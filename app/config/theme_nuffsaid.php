@@ -64,7 +64,7 @@ return [
         'lang' => 'sv',
 
         // Append this value to each <title>
-        'title_append' => ' | Nuff\' said',
+        'title_append' => ' | Spelaihop',
 
         // Stylesheets
         // // 'http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300,800', 

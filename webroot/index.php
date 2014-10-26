@@ -8,7 +8,8 @@ $app->navbar->configure(ANAX_APP_PATH . 'config/navbar_nuffsaid.php');
 $app->url->setUrlType(\Anax\Url\CUrl::URL_CLEAN);
 $app->session(); 
 
-
+$di->set('UsersController', '\Anax\Users\UsersController');
+$di->set('QuestionsController', '\Anax\Questions\QuestionsController');
 
 // Include database support
 $di->setShared('db', function() {
@@ -39,7 +40,6 @@ $app->router->add('', function() use ($app, $di) {
 	]);
 });
 
-$di->set('UsersController', '\Anax\Users\UsersController');
 
 $app->router->add('questions', function() use ($app, $di) {
   $app->theme->setTitle("Frågor");
