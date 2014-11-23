@@ -50,7 +50,7 @@ return [
     'callback' => function($url) {
         if ( $url == $this->di->get('request')->getRoute()) {
             return true; 
-        } else if($url && strpos($this->di->get('request')->getRoute(), $url) === 0) {
+        } else if($url && strpos($this->di->get('request')->getRoute(), $url) === 0 && strpos($this->di->get('request')->getRoute(), 'questions/ask') === false) {
             return true;
         }
     },

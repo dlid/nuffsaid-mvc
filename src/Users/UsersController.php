@@ -51,6 +51,23 @@ class UsersController implements \Anax\DI\IInjectionAware
 			], 'main');
 	}
 
+	public function updateAction() {
+		$this->theme->setTitle("Uppdatera profil");
+		$form = $this->getUpdateForm($this->userContext->getUserId());
+
+		$status = $form->check();
+
+		$formOrMessage = $form->getHTML(array('novalidate' => true));
+
+    if ($status === true) {
+			header("Location: " . $this->url->create('users/view/' . $this->userContext->getUserAcronym()));
+    } 
+
+		$this->views->add('users/update',[
+			'form' => $formOrMessage,
+			], 'main');
+	}
+
 
 	public function lookatmeAction() {
 		header("Content-Type: application/json");
@@ -75,8 +92,7 @@ class UsersController implements \Anax\DI\IInjectionAware
     if ($status === true) {
 			header("Location: " . $this->url->create(''));
     }else if( $status === false ){
-    	$form->AddOutput("Fel användarnamn eller lösenord");
-    	header('Loation: ' . $this->url->create('users/login'));
+    	header('Location: ' . $this->url->create('users/login'));
     }
 
 		$this->views->add('users/login',[
@@ -96,7 +112,7 @@ class UsersController implements \Anax\DI\IInjectionAware
 
 	public function testForUserWithEmail($value) {
 		if( $value != "") {
-			$item = $this->users->findByEmail($value);
+			$item = $this->users->findByEmail($value, $this->userContext->getUserId());
 			if($item) {
 				return false;
 			}
@@ -230,6 +246,51 @@ class UsersController implements \Anax\DI\IInjectionAware
 		return $form;
 	}
 
+	private function getUpdateForm() {
+		$di = $this;
+		$form = $this->form->create([], [
+        'email' => [
+        	'label'       => 'E-post',
+            'type'        => 'text',
+            'required'    => true,
+            'value' => $this->userContext->getUserEmail(),
+            'validation'  => array(
+            	'not_empty', 'email_adress',
+	            'custom_test' => array(
+	            		'message' => 'En användare med denna e-post finns redan', 
+	            		'test' => array($this, 'testForUserWithEmail')
+	            )
+	           ),
+        ],
+        'name' => [
+            'type'        => 'text',
+            'label'       => 'Namn',
+            'value' => $this->userContext->getUserName(),
+            'maxlength'   => 80,
+            'required'    => false,
+            'validation'  => ['not_empty'],
+        ],
+        'submit' => [
+        		'value' 		=> 'Spara',
+            'type'      => 'submit',
+            'callback'  => function ($form) use ($di) {
+
+            		$now = date('Y-m-d H:i:s');
+
+            		$this->db->update('user',
+            			array('name','email', 'updated'),
+            			array($form->Value('name'),$form->Value('email'), $now),
+            			'id=?');
+
+            		$this->db->execute([$this->userContext->getUserId()]);
+
+                return true;
+            }
+        ]
+    ]);
+		return $form;
+	}
+
 	/**
 	* Initialize the controller.
 	*
@@ -248,11 +309,18 @@ class UsersController implements \Anax\DI\IInjectionAware
 	 */
 	public function indexAction()
 	{
-	    $all = $this->users->findAll();
+
+			$ctb = new \Anax\Contributions\Contribution();
+			$ctb->setDi($this->di);
+
+			$users = $ctb->findUsers($this->request->getGet('q'));
 
 	    $this->theme->setTitle("List all users");
-	    $this->views->addString( $this->di->navbar->getSubmenu() ,'sidebar');
-	    $this->views->addString( '<h1>Användare</h1><p>Här hittar du alla tester för Användare för kursmoment 04.</p><p>Navigera genom menyn till höger.</p>','main');
+	    $this->views->add('users/list', [
+	    	'query' => $this->request->getGet('q'),
+	    	'users' => $users
+	    	]);
+
 	}
 
   /**
@@ -572,6 +640,41 @@ class UsersController implements \Anax\DI\IInjectionAware
 	    $this->theme->setTitle('Inaktivera användare');
 			$this->views->addString( $this->di->navbar->getSubmenu() ,'sidebar');
 			$this->views->addString("<h1>Inaktivera användare</h1>" .  (count($allUsers) > 1 ? $form->getHTML(['novalidate' => true]) : '<p>Det finns inga användare att inaktivera</p>'), 'main');
+
+	}
+
+	public function viewAction($acronym) {
+
+		$ctb = new \Anax\Contributions\Contribution();
+		$ctb->setDi($this->di);
+
+		$user = $ctb->findUserByAcronym($acronym);
+		
+
+		if( $user ) {
+			$activities = $ctb->findUserActivities($user->user_id);
+			$this->theme->setTitle(htmlentities($user->acronym, null, 'utf-8'));
+			$this->views->add('users/view', [
+				'item' => $user
+			]);
+				$this->views->add('users/activities', [
+				'userActivities' => $activities,
+				'title' => 'Aktiviteter'
+			]);
+			$this->views->add('users/questions', [
+				'yourOpenQuestions' => $ctb->findUserQuestions($user->user_id),
+				'skipavatar' => true,
+				'title' => 'Senaste frågorna'
+			]);
+			$this->views->add('users/answers', [
+				'recentlyAnswered' => $ctb->findUserAnswers($user->user_id),
+				'skipavatar' => true,
+				'title' => 'Senaste svaren'
+			]);
+		} else {
+			throw new \Exception("User not found");
+		}
+
 
 	}
 

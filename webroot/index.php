@@ -41,11 +41,22 @@ $app->views->addString('<p>Spelaihop är sidan där spelintresserade kan ställa
 
 $app->router->add('', function() use ($app, $di) {
   $app->theme->setTitle("Start");
-	$app->views->add('shared/page', [
-	    'content' => "innehåll",
-	    'byline' => "byline",
-      'sidebar' => "sidebar"
-	]);
+  $cbx = new \Anax\Contributions\Contribution();
+  $cbx->setDI($di);
+
+  $mostUsedTags = $cbx->findMostUsedTags();
+  $questionWithoutCorrectAnswer = $cbx->findQuestionsWithoutCorrectAnswer();
+
+	$app->views->add('shared/startpage', [
+    'tags' => $mostUsedTags,
+    'questionsWithoutCorrectAnswer' => $questionWithoutCorrectAnswer,
+    'recentQuestions' => $cbx->findRecent(5),
+    'activeThreads' => $cbx->findRecentlyActive(5),
+    'yourOpenQuestions' => $cbx->findMyOpenQuestions()
+  ]);
+  $app->views->add('users/activities', [
+    'userActivities' => $cbx->findUserActivities()
+  ]);
 });
 
 

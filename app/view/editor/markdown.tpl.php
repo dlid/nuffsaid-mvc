@@ -63,20 +63,45 @@ margin-bottom: 0.5em;
 	padding: 2px 6px;
 }
 
+.ns-answer-title {
+	margin: 1em 0 0 0;
+	padding:0;
+}
+
+.ns-contrbution-preview-notice {
+	font-size: 1em;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid #eee;
+	margin-top: 2em;
+	text-align: center;
+}
+
 </style>
-<form method="post" action="?">
+<form id="<?=$form_id?>" method="post" action="<?= isset($form_action) ? $form_action : '?'; ?>">
 
 	<?= $formDigest ?>
 	<?php if( isset($reply_to)): ?>
 	<input type="hidden" name="reply_to" value="<?=$reply_to?>" />
 	<?php endif; ?>
+	<?php if( isset($reply_to_slug)): ?>
+	<input type="hidden" name="reply_to_slug" value="<?=$reply_to_slug?>" />
+	<?php endif; ?>
+	<input type="hidden" name="form" value="<?=$form?>" />
+
+	
+
 	<?php if( isset($type)): ?>
 	<input type="hidden" name="type" value="<?=$type?>" />
 	<?php endif; ?>
 	<?php if( isset($id)): ?>
 	<input type="hidden" name="id" value="<?=$id?>" />
 	<?php endif; ?>
+	<?php if( isset($reply_to)): ?>
+	<hr />
+	<?php endif; ?>
+	<?php if( $reply_to == 0): ?>
 	<div class="ns-group">
+	
 		<div class="ns-control ns-col">
 			<label>Rubrik:</label>
 			<input name="title" value="<?=$title?>" data-helpbox="helpbox-topic" class="ns-textbox" type="text" placeholder="Vad vill du fråga? Försök sätt en tydlig rubrik" />
@@ -84,9 +109,12 @@ margin-bottom: 0.5em;
 		</div>
 		<div class="ns-control ns-col">
 			<label>Taggar:</label>
-			<input name="tags" type="hidden" value="<?=$tags?>" data-helpbox="helpbox-tags" id="e1">
+			<input name="tags" type="hidden" value="<?=$tags?>" data-helpbox="helpbox-tags" class="tag-editor" >
 		</div>
 	</div>
+	<?php else: ?>
+		<h3 class="ns-answer-title">Ditt svar:</h3>
+	<?php endif; ?>
 		<?php if(isset($tagmessage) && !empty($tagmessage)): ?>
 		<div class="ns-message-warning">
 				<?=$tagmessage?>

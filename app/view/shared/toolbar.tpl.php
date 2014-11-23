@@ -12,10 +12,14 @@
 	
 
 	<img alt="" src="http://www.gravatar.com/avatar/<?=md5($this->di->userContext->getUserEmail());?>.jpg?s=16"  />
-	<a href="<?= $this->di->url->create('users/profile') ?>"><?= $this->di->userContext->getUserDisplayName() ?></a>
+	<a href="<?= $this->di->url->create('users/view/' . $this->di->userContext->getUserAcronym()) ?>"><?= $this->di->userContext->getUserDisplayName() ?></a>
 	&nbsp;&nbsp;&nbsp;
-	<span class="fa fa-star" style="color:yellow"></span> 
-	<a href="<?= $this->di->url->create('users/profile/' . $this->di->userContext->getUserId()) ?>/reputation" title="Your reputation"><strong style="color: yellow">331</strong></a>
+	<a href="<?= $this->di->url->create('users/view/' . $this->di->userContext->getUserAcronym()) ?>/reputation" title="Dina ryktespoäng">
+	<span class="fa fa-star<?= $this->di->userContext->getUserReputation() < 0 ? '-o orange' : ' yellow' ?>"></span> 
+	<strong class="<?= $this->di->userContext->getUserReputation() < 0 ? 'orange' : 'yellow' ?>"><?=$this->di->userContext->getUserReputation()?></strong></a>
+	<a href="<?= $this->di->url->create('users/view/' . $this->di->userContext->getUserAcronym()) ?>/activity" title="Dina aktivitetspoäng">
+	<span class="fa fa fa-tachometer"></span> 
+	<strong><?=$this->di->userContext->getUserActivityScore()?></strong></a>
 	&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 	<a href="<?= $this->di->url->create('users/logout') ?>" title="Your reputation">Logga ut</a>
 

@@ -51,6 +51,26 @@ class CViewContainerBasic implements \Anax\DI\IInjectionAware
         return $this;
     }
 
+    public function renderAsString($template, $data = []) {
+        $view = new CViewBasic('view');
+
+        if (is_string($template)) {
+            $tpl = $this->path . $template . $this->suffix;
+            $type = 'file';
+        } elseif (is_array($template)) {
+            $tpl = $template;   
+            $type = 'callback';
+        }
+
+        $view->set($tpl, $data, 0, $type);
+        $view->setDI($this->di);
+        
+        ob_start();
+        $view->render();
+        return ob_get_clean();
+        
+    }
+
     /**
      * Add a string as a view.
      *

@@ -11,6 +11,18 @@ Built to be similar to StackOverflow as per the [requirements][2] in the course 
 
 The current core implementation of nuffsaid is a swedish chat about gaming.
 
+
+Setup
+============
+
+Download and unzip the content to get started.
+
+Make sure you have write access to the data folder and the database in the folder.
+
+Make sure you have write access to the webroot/nuffsaid-base folder and on the files
+style.less.cache and style.css.
+
+
  
 History
 -----------------------------------

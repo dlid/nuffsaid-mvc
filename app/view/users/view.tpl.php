@@ -1,29 +1,17 @@
-<h1><?=$title?></h1>
- 
-<?php
+<h1><?=htmlentities($item->name ? $item->name : $item->acronym, null, 'utf-8')?></h1>
 
-	$prop = $user->getProperties();
+<?php if( $item->user_id == $this->userContext->getUserId()): ?>
+	<p><a href="<?=$this->url->create('users/update')?>"><span class="fa fa-edit"></span> redigera din profil</a></p>
+<?php endif; ?>
 
-	$status = "";
-	if( $prop['active'] == null ) {
-		$url = $this->url->create('users/activate/' . $prop['id']);
-		$status = 'Inaktiv | <a href="'.$url.'">aktivera</a>';
-	} else if( $prop['deleted'] != null ) {
-		$url = $this->url->create('users/restore/' . $prop['id']);
-		$status = 'Borttagen (' . $prop['deleted'] . ') | <a href="'.$url.'">återställ</a>';
-	} else {
-		$url = $this->url->create('users/deactivate/' . $prop['id']);
-		$status = 'Aktiv (' . $prop['active'] . ') | <a href="'.$url.'">inaktivera</a>';
-	}
-
-?>
-
-<h2>#<?= $prop['id'] ?> <?= $prop['name'] ?></h2>
-
-<ul>
-	<li>Alias: <?= $prop['acronym'] ?></li>
-	<li>Namn: <?= $prop['name'] ?></li>
-	<li>Status: <?= $status ?></li>
-	<li>E-post: <?= $prop['email'] ?></li>
-	<li>Skapad: <?= $prop['created'] ?></li>
-</ul>
+<div class="row">
+	<div class="col-4">
+			<div class="ns-user-block">
+			<img src="<?=$item->avatar32?>" />
+			<div>
+				<a href="<?=$item->user_url?>"><?=$item->acronym?></a> <?=$item->userActivityBadge?> <?=$item->userReputationBadge?><br />
+				<small>blev medlem <date datetime="<?= $item->created ?>" class="js-relative"><?= $item->created ?></date></small>
+			</div>
+		</div>
+	</div>
+</div>

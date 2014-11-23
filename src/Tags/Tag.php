@@ -18,7 +18,8 @@ class Tag extends \Anax\MVC\CDatabaseModel
 
 		$this->db->select()
 			->from($this->getSource())
-			->where("id IN ($macros)");
+			->where("id IN ($macros)")
+			->orderBy('name');
 
 		$this->db->execute($ids);
 		$ret = $this->db->fetchAll();
@@ -40,20 +41,18 @@ class Tag extends \Anax\MVC\CDatabaseModel
 	}
 
 	public function ensureTag($tag) {
-
 		if(!is_numeric($tag->id)) {
+
 			$this->create(array(
 				'name' => $tag->name,
 				'slug' => $tag->slug,
 				'created' => date('Y-m-d H:i:s')
 			));
+			
 			return $this->id;
 		} else {
 			return $tag->id;
 		}
-
-		dump($tags);
-		exit;
 	}
 
 	public function fillExistingTags(&$listOfTags) {
@@ -69,7 +68,7 @@ class Tag extends \Anax\MVC\CDatabaseModel
 		foreach( $items as $row ) {
 			foreach($listOfTags as &$t) {
 				if( $t['id'] == $row->id) {
-					$t['text'] = $row->name;
+					$t['name'] = $row->name;
 					$t['slug'] = $row->slug;
 					break;
 				}
@@ -88,10 +87,12 @@ class Tag extends \Anax\MVC\CDatabaseModel
 
 		$words = [];
 		foreach( $listOfTags as $t) {
-			if( isset($t['text']) ) {
-			 $words[] = mb_strtolower($t['text'], 'UTF-8');
+			if( isset($t['name']) ) {
+			 $words[] = mb_strtolower($t['name'], 'UTF-8');
 			}
 		}
+
+		#dump($words);
 
 		if( count($words) == 0 )
 			return;
@@ -107,7 +108,7 @@ class Tag extends \Anax\MVC\CDatabaseModel
 
 		foreach($x as $row) {
 			foreach($listOfTags as &$tag) {
-				if( strtolower($tag['text']) == strtolower($row->word)) {
+				if( isset($tag['name']) && strtolower($tag['name']) == strtolower($row->word)) {
 					$tag['banned'] = 1;
 					$tag['banned_reason'] = $row->banned_reason;
 				}
@@ -185,6 +186,7 @@ class Tag extends \Anax\MVC\CDatabaseModel
 					}
 				}
 			}
+
 
 			// Build new string
 			$new = array();

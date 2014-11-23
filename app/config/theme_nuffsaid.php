@@ -67,8 +67,7 @@ return [
         'title_append' => ' | Spelaihop',
 
         // Stylesheets
-        // // 'http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300,800', 
-        'stylesheets' => ['http://fonts.googleapis.com/css?family=Ubuntu:300,400,500', 'css/nuffsaid-base/style.php'],
+        'stylesheets' => ['css/nuffsaid-base/style.php'],
 
         // Inline style
         'style' => null,

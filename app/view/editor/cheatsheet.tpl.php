@@ -19,7 +19,6 @@
 	<hr /> 
 	<p>Här kan du läsa mer om formatteringen som används:</p>
 	<ul class="fa-ul">
-		<li><span class="fa fa-question-circle"></span> <a href="<?= $this->di->url->create('about/formatting') ?>" rel="external">Om formattering</a></li>
 		<li><span class="fa fa-question-circle"></span> <a href="http://daringfireball.net/projects/markdown/syntax" rel="external">Markdowns officiella sida</a></li>
 	</ul>
 </div>
@@ -35,10 +34,5 @@
 	<ul class="fa-ul">
 		<li><span class="fa fa-arrow-circle-right"></span> Tryck <strong>Enter</strong> för att lägga till tagg</li>
 		<li><span class="fa fa-arrow-circle-right"></span> Fler taggar preciserar frågan bättre</li>
-	</ul>
-	<hr /> 
-	<p>Här kan du läsa mer om taggning:</p>
-	<ul class="fa-ul">
-		<li><span class="fa fa-question-circle"></span> <a href="<?= $this->di->url->create('about/tags') ?>" rel="external">Om taggning</a></li>
 	</ul>
 </div>

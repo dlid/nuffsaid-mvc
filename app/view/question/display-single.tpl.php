@@ -1,24 +1,55 @@
-<div class="ns-contribution-item">
+<div id="c<?=$id?>" class="ns-contribution-item ns-type-<?=strtolower($type)?>">
+<?php if( $type == 'QUERY' ): ?>
 	<div class="row">
 		<h2 class="ns-header"><?= $title ?></h2>
 	</div>
-	<div class="row">
-		<div class="ns-footer">
-			fråga från <a href="a"><img src="<?=$avatar?>" width="16" height="16" style="vertical-align:middle;" alt="gravatar image" /> <?= $username ?></a> <date datetime="<?=$created?>" class="js-relative"><?=$created?></date>
-		</div>
-	</div>
+<?php endif; ?>
 	<div class="row">
 		<div class="ns-panel">
-			<p class="compact center" style="color: #666"><span class="fa fa-thumbs-up fa-2x"></span></p>
-			<p class="compact center" style="font-size: 2em;font-weight:bold;color: #666">0</p>
-			<p class="compact center" style="color: #666"><span class="fa fa-thumbs-down fa-2x"></span></p>
+			<?php if(isset($upvote) && $upvote): ?>
+				<p class="compact center up"><a title="Rösta upp <?=$type == 'QUERY' ? 'välställda frågor som du tycker innehåller bra information' : 'svar som tillför något värdefullt och relevant till frågeställningen'?>" href="<?= $this->di->url->create('questions/upvote/' . $id) ?>" class="fa fa-caret-up fa-2x"></a></p>
+			<?php elseif( isset($upvoted) && $upvoted): ?>
+				<p class="compact center up"><a title="Du har röstat upp den här. Klicka för att ångra." href="<?= $this->di->url->create('questions/upvote/' . $id . '/undo') ?>" class="fa fa-caret-up fa-2x green"></a></p>
+			<?php else: ?>
+				<p class="compact center up"><span class="fa fa-caret-up fa-2x disabled"></span></p>
+			<?php endif; ?>
+			<p class="compact center rating<?= (isset($rating) ? ($rating < 0? ' orange' : ($rating != 0 ? ' green' : '')) : '') ?>"><?= isset($rating) ? $rating : 0 ?></p>
+			<?php if(isset($downvote) && $downvote): ?>
+				<p class="compact center down"><a title="Rösta ned <?=$type == 'QUERY' ? 'frågor som är dåligt ställda, saknar viktig information eller handlar om fel saker' : 'svar som inte tillför något till konversationen'?>" href="<?= $this->di->url->create('questions/downvote/' . $id) ?>" class="fa fa-caret-down fa-2x"></a></p>
+			<?php elseif( isset($downvoted) && $downvoted): ?>
+				<p class="compact center up"><a title="Du har röstat ned den här. Klicka för att ångra." href="<?= $this->di->url->create('questions/downvote/' . $id . '/undo') ?>" class="fa fa-caret-down fa-2x orange"></a></p>
+			<?php else: ?>
+				<p class="compact center down"><span class="fa fa-caret-down fa-2x disabled"></span></p>
+			<?php endif; ?>
+
+			<?php if(isset($accept) && $accept && !$accepted): ?>			
+			<p class="compact center accept"><a title="" href="<?= $this->di->url->create('questions/accept/' . $id) ?>" class="fa fa-check"></a></p>
+			<?php elseif(isset($accept) && $accept && $accepted): ?>
+			<p class="compact center accept"><a title="" href="<?= $this->di->url->create('questions/accept/' . $id . '/undo') ?>" class="fa fa-check green"></a></p>
+			<?php elseif($accepted): ?>
+			<p class="compact center accept"><span title="Det här är det accepterade svaret" class="fa fa-check green"></span></p>
+			<?php endif; ?>	
+
+			<?php if(isset($close) && $close && !$closed): ?>
+			<p class="compact center close"><a title="Stäng frågan utan att acceptera ett svar" href="<?= $this->di->url->create('questions/close/' . $id) ?>" class="fa fa-close red"></a></p>
+			<?php elseif(isset($close) && $close && $closed): ?>
+			<p class="compact center close"><a title="Ångra stängningen av frågan" href="<?= $this->di->url->create('questions/close/' . $id . '/undo') ?>" class="fa fa-undo"><span class="fa fa-close"></span></a></p>
+			<?php endif; ?>
+	
 		</div>
 		<div class="ns-content">
+				<div class="ns-user-block" style="float:right;">
+			<img src="<?=$item->avatar32?>" />
+			<div>
+				av <a href="<?=$item->user_url?>"><?=$item->acronym?></a> <?=$item->userActivityBadge?> <?=$item->userReputationBadge?><br />
+				<small><date datetime="<?= $item->created ?>" class="js-relative"><?= $item->created ?></date></small>
+			</div>
+		</div>
 			<?= $text ?>
 		</div>
 	</div>
 
-	<?php if(isset($tags)): ?>
+	<?php if(isset($tags) && $type == 'QUERY'): ?>
 		<div class="row">
 			<div class="ns-footer" >
 				<span class="fa fa-tags"></span>
@@ -35,10 +66,24 @@
 <?php if( !isset($preview)): ?>	
 		<div class="row">
 			<div class="ns-footer" style="margin-left:80px;margin-top:10px">
-				<img width="24" height="24" alt="avatar" style="vertical-align:top; margin-top: 2px;" src="<?= $currentuser_avatar ?>">
-				<input type="text" placeholder="Skriv din kommentar här" style="width: 80%; color:#333; padding:4px;" />
-				<p style="margin:4px 0; line-height: 1.5em; font-size: .85em">Använd kommentarer om du behöver mer information för att kunna ge ett svar.<br />
-				Du kan använda Markdown - men håll det kortfattat!</p>
+				<?php if(isset($commentform)):  ?>
+					<?= $commentform ?>
+				<?php endif; ?>
+				<?php if(isset($comments)):  ?>
+					<div class="ns-comment-list">
+					<?php foreach($comments as $comment): ?>
+						<div id="c<?=$comment->id?>" class="ns-comment">
+							<img src="<?=$comment->avatar?>" /> 
+							<?= str_replace('</p>', '', str_replace('<p>', '', $this->filter->doFilter($comment->body, 'markdown')))  ?>
+							<span class="ns-comment-meta">
+							- <?=$comment->acronym?>
+							<date datetime="<?=$comment->created?>" class="js-relative"><?=$comment->created?></date>
+
+							</span>
+						</div>
+					<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 <?php endif; ?>	

@@ -49,7 +49,7 @@ class CTextFilter
     }
 
     public function striphtml($text) {
-        $text = strip_tags($text, '<a><b><strong><em><img>');
+        $text = strip_tags($text, '<a><b><strong><em><img><pre><p><h1><h2><h3><h4><h5><hr><blockquote><code><ul><ol><li>');
         $text = $this->stripAttributes($text, ['href', 'src']);
         return $text;
     }

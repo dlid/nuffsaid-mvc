@@ -68,9 +68,22 @@ class UserContext extends \Anax\MVC\CDatabaseModel
 
 	private function findActiveByToken($token) {
 		#$this->db->setVerbose(true);
-		$this->db->select('ns_usercontext.id,user_id,email,acronym,name,is_admin,ns_usercontext.created,seen')
-	           ->from($this->getSource())
-	           ->join('user', ' user_id = ns_user.id')
+		#
+		$columns = array('c.id',
+			'user_id',
+			'email',
+			'acronym',
+			'name',
+			'is_admin',
+			'c.created',
+			'seen',
+			'(SELECT SUM(reputation_score) FROM ns_useractivity a WHERE user_id = c.user_id AND deleted IS NULL) as reputation',
+			'(SELECT SUM(activity_score) FROM ns_useractivity a WHERE user_id = c.user_id AND deleted IS NULL) as activity_score',
+			);
+		
+		$this->db->select(implode(',', $columns) )
+	           ->from($this->getSource(), 'c')
+	           ->join('user', 'c.user_id = ns_user.id')
 	           ->where("token = ?")
 	           ->andWhere("expired IS NULL");
 
@@ -101,6 +114,21 @@ class UserContext extends \Anax\MVC\CDatabaseModel
 			}
 		}
 	}
+	public function getUserName() {
+		if( $this->isLoggedIn() ){
+			if($this->name) {
+				return $this->name;
+			}
+		}
+	}
+
+	public function getUserAcronym() {
+		if( $this->isLoggedIn() ){
+			if($this->acronym) {
+				return $this->acronym;
+			}
+		}
+	}
 
 
 	public function getIsAdmin() {
@@ -113,11 +141,33 @@ class UserContext extends \Anax\MVC\CDatabaseModel
 	}
 
 	public function getUserId() {
-		if($this->user_id) {
-			return $this->user_id;
+		if($this->isLoggedIn()) {
+			if($this->user_id) {
+				return $this->user_id;
+			}
 		}
 		return null;
 	}
+
+	public function getUserReputation() {
+		if($this->isLoggedIn()) {
+			if($this->reputation) {
+				return $this->reputation ? $this->reputation : 0;
+			}
+		}
+		return 0;
+	}
+
+	public function getUserActivityScore() {
+		if($this->isLoggedIn()) {
+			if($this->activity_score) {
+				return $this->activity_score ? $this->activity_score : 0;
+			}
+		}
+		return 0;
+	}
+
+	
 
 	
 

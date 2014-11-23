@@ -22,8 +22,7 @@ trait TSQLQueryBuilderBasic
     private $orderby;   // Order by part
     private $limit;     // Limit by part
     private $offset;    // Offset by part
-
-
+    private $group;
 
 
     /**
@@ -54,6 +53,7 @@ trait TSQLQueryBuilderBasic
             . $this->from . "\n"
             . ($this->join    ? $this->join           : null)
             . ($this->where   ? $this->where . "\n"   : null)
+            . ($this->group   ? $this->group . "\n"   : null)
             . ($this->orderby ? $this->orderby . "\n" : null)
             . ($this->limit   ? $this->limit . "\n"   : null)
             . ($this->offset  ? $this->offset . "\n"  : null)
@@ -243,7 +243,7 @@ trait TSQLQueryBuilderBasic
             } else {
                 $vals .= (is_string($val)
                     ? "'$val'"
-                    : $val)
+                    : ($val === null ? 'null' : $val))
                     . ', ';
             }
         }
@@ -384,9 +384,12 @@ trait TSQLQueryBuilderBasic
      *
      * @return $this
      */
-    public function from($table)
+    public function from($table, $alias = '')
     {
         $this->from = "FROM " . $this->prefix . $table;
+        if ($alias) {
+            $this->from .= " as " . $alias;
+        }
 
         return $this;
     }
@@ -441,7 +444,18 @@ trait TSQLQueryBuilderBasic
         return $this;
     }
 
-
+     /**
+     * Build the group by
+     *
+     * @param string $condition for building the where part of the query.
+     *
+     * @return $this
+     */
+    public function groupBy($condition)
+    {
+        $this->group = "GROUP BY " . $condition;
+        return $this;
+    }
 
     /**
      * Build the order by part.

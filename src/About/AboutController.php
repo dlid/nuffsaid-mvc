@@ -30,6 +30,20 @@ class AboutController implements \Anax\DI\IInjectionAware
 	  $this->views->addString('','sidebar');
 	}
 
+	public function reportAction() {
+		$this->theme->setTitle("Redovisning");
+
+	  $content = $this->fileContent->get('redovisning.md');
+	  $content = $this->textFilter->doFilter($content, 'shortcode, markdown');
+
+	  $this->views->add('shared/page', [
+	      'content' => $content,
+	      'sidebar' => ""
+	  ], 'main');
+
+	  $this->views->addString('','sidebar');
+	}
+
 
 	public function askingAction() {
 		$this->theme->setTitle("Att ställa en fråga");

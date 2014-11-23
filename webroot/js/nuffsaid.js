@@ -61,8 +61,8 @@ $(function() {
 
 
 
-	if($("#e1").length ==1) {
-	 $("#e1").select2({
+	if($(".tag-editor").length > 0) {
+	 $(".tag-editor").select2({
 	 	width: '100%',
 	 	createSearchChoice : function(term, data) {
 	 		return {

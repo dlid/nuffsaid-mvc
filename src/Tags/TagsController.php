@@ -11,14 +11,24 @@ class TagsController implements \Anax\DI\IInjectionAware
 	use \Anax\DI\TInjectable;
 
 	public function indexAction() {
-		$this->theme->setTitle("Etiketter");
+		$this->theme->setTitle("Tags");
+
+		$ctb = new \Anax\Contributions\Contribution();
+		$ctb->setDi($this->di);
+
+		$tags = $ctb->findTags($this->request->getGet('q'));
+
+		$this->views->add('tags/browse', [
+			'tags' => $tags,
+			'query' => htmlentities($this->request->getGet('q'), null, 'utf-8')
+		]);
 	}
 
 	public function getByIdsAction() {
 
 		header("Content-Type: application/json");
 
-		// Only get the first five
+		// Only get the first 'five
 		$idList = array_slice(func_get_args(), 0, 5);
 
 		$tagMgr = new \Anax\Tags\Tag();

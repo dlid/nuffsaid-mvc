@@ -52,13 +52,25 @@ class User extends \Anax\MVC\CDatabaseModel
 	*
 	* @return this
 	*/
-	public function findByEmail($email)
+	public function findByEmail($email, $not_id = null)
 	{
-	  $this->db->select()
-	           ->from($this->getSource())
-	           ->where("email = ?");
 
-	  $this->db->execute([$email]);
+
+
+
+		if(!$not_id) {
+  	$this->db->select()
+       ->from($this->getSource())
+       ->where("email = ?");
+        $this->db->execute([$email]);
+     } else {
+     	$this->db->select()
+       ->from($this->getSource())
+       ->where("email = ?")
+       ->andWhere("id <> ?");
+        $this->db->execute([$email, $not_id]);
+     }
+	 
 	  return $this->db->fetchInto($this);
 	}	
 
