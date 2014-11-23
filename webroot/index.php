@@ -37,6 +37,28 @@ $di->setShared('userContext', function() use ($di) {
     return $ctx;
 });
 
+$app->router->add('source', function() use ($app, $di) {
+ 
+    $app->theme->addStylesheet('css/nuffsaid-base/source.css');
+    $app->theme->setTitle("Källkod");
+ 
+
+    $source = new \Mos\Source\CSource([
+        'secure_dir' => '..', 
+        'base_dir' => '..', 
+        'add_ignore' => ['.htaccess'],
+    ]);
+
+    if( $source->getRealPath() ) {
+      $app->theme->setTitle("Källkod för " . basename($source->getRealPath()) );
+    }
+
+    $app->views->add('shared/source', [
+        'content' => $source->View(),
+    ]);
+
+});
+
 $app->views->addString('<p>Spelaihop är sidan där spelintresserade kan ställa frågor om alla möjliga spel och få svar.</p>', 'footer-col-1');
 
 $app->router->add('', function() use ($app, $di) {

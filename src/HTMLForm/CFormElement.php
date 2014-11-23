@@ -352,6 +352,7 @@ class CFormElement implements \ArrayAccess
           'numeric' => array('message' => 'Måste vara numeriskt', 'test' => 'return is_numeric($value);'),
           'email_adress' => array('message' => 'Måste vara en e-postadress', 'test' => function($value) { return preg_match('/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i', $value) === 1; } ),
           'match' => array('message' => 'The field does not match.', 'test' => 'return $value == $form[$arg]["value"] ;'),
+          'alphanumeric' => array('message' => 'Minst tre tecken - endast a-z och 0-9 får användas', 'test' => function($value) { return preg_match('/^[a-z0-9]{3,}$/i', $value) === 1; }),
           'must_accept' => array('message' => 'You must accept this.', 'test' => 'return $checked;'),
           'custom_test' => true,
         ];

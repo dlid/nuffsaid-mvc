@@ -24,7 +24,6 @@ $app->router->add('', function() use ($app, $di) {
 $di->set('yuml', function() use ($di) {
     $db = new \Dlid\DbYuml\CDbYuml();
     $db->setOptions([  
-        'cachepath' => 'dali14',
         'dialect' => 'sqlite',
         'query' => function($query, $parameters) use ($di) {
             $di->db->execute($query, $parameters);

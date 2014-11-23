@@ -34,4 +34,5 @@ Den här sidan är resultatet av projektuppgiften för phpmvc.
 
 Du kan läsa [redovisningen här](about/report).
 
+Källkoden går också att titta på men är [lite dold](source).
 

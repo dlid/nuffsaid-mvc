@@ -178,6 +178,7 @@ class UsersController implements \Anax\DI\IInjectionAware
             'maxlength'   => 20,
             'validation'  => array(
             	'not_empty',
+            	'alphanumeric',
 	            'custom_test' => array(
 	            		'message' => 'Användarnamnet används redan', 
 	            		'test' => array($this, 'testForUserWithUsername')
